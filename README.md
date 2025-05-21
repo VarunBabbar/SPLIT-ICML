@@ -1,2 +1,2 @@
 # SPLIT-ICML
-Official code for the ICML 2025 paper "Near Optimal Decision Trees in a SPLIT Second" 
+Official code for the ICML 2025 Spotlight paper "Near Optimal Decision Trees in a SPLIT Second" 
