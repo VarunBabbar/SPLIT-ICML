@@ -1,0 +1,8 @@
+{
+  "source_dir": "/usr/project/xtmp/vb97/gosdt_optimization_project/SPLIT-ICML",
+  "build_dir": "/usr/project/xtmp/vb97/gosdt_optimization_project/SPLIT-ICML/pyproject-build/cp310-cp310-linux_x86_64",
+  "cmake_path": "/bin/cmake",
+  "skbuild_path": "/tmp/pip-build-env-x9p3vhnw/overlay/lib/python3.10/site-packages/scikit_build_core",
+  "skbuild_version": "0.11.3",
+  "python_executable": "/usr/project/xtmp/vb97/gosdt_optimization_project/split_camera_ready/bin/python3"
+}

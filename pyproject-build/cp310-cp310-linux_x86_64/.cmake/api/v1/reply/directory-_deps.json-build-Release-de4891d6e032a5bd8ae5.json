@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "_deps/json-build",
+		"source" : "pyproject-build/cp310-cp310-linux_x86_64/_deps/json-src"
+	}
+}
