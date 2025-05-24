@@ -9,7 +9,7 @@ from .utils import num_leaves, tree_to_dict
 
 # version with no automatic guessing
 class SPLIT: 
-    def __init__(self, time_limit=60, verbose=True, reg=0.001, 
+    def __init__(self, time_limit=60, verbose=False, reg=0.001, 
                  lookahead_depth_budget=3, full_depth_budget = 6,
                  similar_support=False, allow_small_reg=True, greedy_postprocess = False, 
                  binarize = False, gbdt_n_est=50, gbdt_max_depth=1, 

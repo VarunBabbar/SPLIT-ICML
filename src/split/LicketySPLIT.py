@@ -19,7 +19,7 @@ LOOKAHEAD_RANGE = 2
 
 # version with no automatic guessing
 class LicketySPLIT: 
-    def __init__(self, time_limit=60, verbose=True, reg=0.001, 
+    def __init__(self, time_limit=60, verbose=False, reg=0.001, 
                  full_depth_budget = 6, lookahead_range=LOOKAHEAD_RANGE,
                  similar_support=False, allow_small_reg=True, binarize = False, 
                  gbdt_n_est=50, gbdt_max_depth=1):
