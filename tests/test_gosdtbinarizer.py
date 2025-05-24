@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import numpy as np
 
-from gosdt import NumericBinarizer 
+from split import NumericBinarizer 
 
 tests_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.dirname(tests_dir)
