@@ -7,7 +7,6 @@ from sklearn.model_selection import train_test_split
 import time
 from .utils import num_leaves, tree_to_dict
 
-# version with no automatic guessing
 class SPLIT: 
     def __init__(self, time_limit=60, verbose=False, reg=0.001, 
                  lookahead_depth_budget=3, full_depth_budget = 6,
