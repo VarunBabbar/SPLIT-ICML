@@ -3,7 +3,7 @@ Official code for the ICML 2025 Spotlight paper "Near Optimal Decision Trees in 
 
 # Instructions
 
-For now, run 
+Run 
 ```bash
 pip install split
 ```
