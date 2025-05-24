@@ -20,9 +20,13 @@ regularization = 0.01
 model = SPLIT(lookahead_depth_budget=lookahead_depth, time_limit=args.time_limit, reg=regularization, full_depth_budget=full_depth_budget, verbose=False, binarize=False) # set binarize = True if dataset is not binarized.
 model.fit(X,y)
 y_pred = model.predict(X)
+tree = model.tree
+print(tree)
 ```
 To run LicketySPLIT
 ```python
 from split import LicketySPLIT
 model = LicketySPLIT(full_depth_budget=full_depth_budget,reg=regularization)
+.... # same as above
+...
 ```
