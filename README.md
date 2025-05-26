@@ -32,8 +32,7 @@ model = LicketySPLIT(full_depth_budget=full_depth_budget,reg=regularization)
 ...
 ```
 
-To run RESPLIT:
-
+To run RESPLIT
 
 ```python
 from resplit import RESPLIT
@@ -54,7 +53,7 @@ tree = model[i] # get the ith tree
 print(tree)
 y_pred = model.predict(X,i) # predictions for the ith tree
 ```
-For now, we recommend running RESPLIT via a command line script (e.g. python3 run_resplit_on_compas.py) or a slurm script rather than in a Jupyter notebook. We have observed some timeout issues in Jupyter and are investigating these actively.  
+For now, we recommend running RESPLIT via a command line script (e.g. python3 run_resplit_on_compas.py) or a slurm script rather than in a Jupyter notebook. We have observed some timeout issues in Jupyter and are investigating these actively. There is an example in resplit/example where you can first run `pip install treefarms` and then the script `python3 resplit_example.py" to see the difference in runtime between TreeFARMS and RESPLIT. 
 
 We also note the other options in the config which are most commonly used:
 
