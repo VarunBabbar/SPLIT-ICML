@@ -49,7 +49,7 @@ config = {
 }
 model = RESPLIT(config, fill_tree = "treefarms")
 # find the set of near optimal lookahead prefixes, and fill each leaf of each prefix with another TreeFARMS Rashomon set.
-# Options for fill_tree: "treefarms", "optimal", "greedy". "optimal" will complete prefixes using GOSDT, greedy will do so using greedy completions 
+# Options for fill_tree: "treefarms", "optimal", "greedy". "treefarms" will fill each leaf of each prefix with another TreeFARMS Rashomon set. "optimal" will complete prefixes using GOSDT. "greedy" will do so using greedy completions. 
 model.fit(X,y)
 tree = model[i] # get the ith tree
 print(tree)
