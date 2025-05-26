@@ -14,7 +14,7 @@ def load_dataset(path):
 def run_resplit(X, y):
     print("\n Running RESPLIT...")
     config = {
-        "regularization": 0.005,
+        "regularization": 0.01,
         "rashomon_bound_multiplier": 0.01,
         "depth_budget": 5,
         "cart_lookahead_depth": 3,
@@ -30,7 +30,7 @@ def run_resplit(X, y):
 def run_treefarms(X, y):
     print("\n Running TREEFARMS...")
     config = {
-        "regularization": 0.005,
+        "regularization": 0.01,
         "rashomon_bound_multiplier": 0.01,
         "depth_budget": 5,
         "verbose": False
