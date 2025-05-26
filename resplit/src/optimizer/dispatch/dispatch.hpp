@@ -163,12 +163,7 @@ bool Optimizer::load_children(Task & task, Bitmask const & signals, unsigned int
                 }
             }            
         }
-        // if (this->rashomon_flag) {
-        //     if (std::get<1>(* iterator) > task.rashomon_bound()) { continue; }
-        // }
-        // else if (std::get<1>(* iterator) > task.upperscope()) { continue; }
         if (std::get<1>(* iterator) > task.upperscope()) {
-            // std::cout << "Child lower bound: " << std::get<1>(* iterator) << " Task upper scope: " << task.upperscope() << std::endl;
              continue; }
         if (std::get<2>(* iterator) < upper) { optimal_feature = std::get<0>(* iterator); }
         lower = std::min(lower, std::get<1>(* iterator));

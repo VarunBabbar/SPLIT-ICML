@@ -166,12 +166,6 @@ void Task::prune_features(unsigned int id) {
                 upper = left.upperbound() + right.upperbound();
             }
 
-            // std::cout << "Split: " << j << ", Bound: [" << left.lowerbound() << " + " << right.lowerbound()  << ", " << left.upperbound() << " + " << right.upperbound() << "]" << std::endl;
-            // std::cout << "Split: " << j << ", Bound: [" << lower  << ", " << upper << "]" << std::endl;
-
-            // if (this -> _rashomon_flag) { 
-            //     if (lower > this -> _rashomon_bound) { continue; } // Hierarchical objective lower bounds for Rashomon set
-            // } else if (lower > this -> _upperscope) { continue; } // Hierarchical objective lower bounds
             if (lower > this -> _upperscope) { continue; } // Hierarchical objective lower bounds
             if (upper < new_upper) { optimal_feature = j; }
             new_lower = std::min(new_lower, lower);

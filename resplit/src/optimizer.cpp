@@ -170,7 +170,6 @@ void Optimizer::export_models(std::string suffix) {
 
         std::string serialization;
         tree->serialize(serialization, 2);
-        // std::cout << serialization << std::endl;
         // 
         std::stringstream fmt;
         fmt << Configuration::rashomon_trie << "-" << suffix;

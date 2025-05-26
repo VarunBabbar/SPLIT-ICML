@@ -45,7 +45,6 @@ bool Optimizer::diagnose_non_convergence(key_type const & key) {
             std::get<1>(* iterator) = lower;
             std::get<2>(* iterator) = upper;
             std::cout << "Missing Signal:" << std::endl;
-            // std::cout << "Task: " << task -> second.capture_set().to_string() << std::endl;
             std::cout << "Missing Signal From Feature: " << feature << std::endl;
         }
 
