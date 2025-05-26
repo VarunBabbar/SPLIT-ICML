@@ -69,7 +69,7 @@ y_pred = model.predict(X,i) # predictions for the ith tree
    ```
    This will demonstrate the difference in runtime between TreeFARMS and RESPLIT.
 
-### Common Config Options
+### Common Config Options for RESPLIT
 
 - **`rashomon_bound_adder`**  
   An alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models within `L* + ε` of the best loss `L*`.
