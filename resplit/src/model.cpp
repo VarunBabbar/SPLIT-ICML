@@ -73,7 +73,6 @@ void Model::_partitions(std::vector< Bitmask * > & addresses) const {
 void Model::partitions(std::vector< Bitmask * > & sorted_addresses) const {
     std::vector< Bitmask * > addresses;
     _partitions(addresses);
-    // std::cout << "_partition size: " << addresses.size() << std::endl;
     std::map< unsigned int, Bitmask * > sorted;
     // for (auto it = addresses.begin(); it != addresses.end(); ++it) {
     //     Bitmask * address = * it;
@@ -93,7 +92,6 @@ void Model::partitions(std::vector< Bitmask * > & sorted_addresses) const {
     for (auto it = addresses.begin(); it != addresses.end(); ++it) {
         sorted_addresses.push_back(* it);
     }
-    // std::cout << "partition size: " << sorted_addresses.size() << std::endl;
     return;
 };
 
