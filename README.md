@@ -55,11 +55,10 @@ y_pred = tree.predict(X)
 ```
 For now, we recommend running RESPLIT via a command line script (e.g. python3 run_resplit_on_compas.py) or a slurm script rather than in a Jupyter notebook. We have observed some timeout issues in Jupyter and are investigating these actively.  
 
-The cause for this is yet unknown, but is being investigated. 
-
 We also note the other options in the config which are most commonly used:
 
 1. `rashomon_bound_adder`: A alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within `L* + ε` of the best loss `L*`.
 2. `rashomon_bound`: An alternative to for `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within the rashomon bound. This is a hard loss instead of a relative `ε` threshold.
+
 
 For more config options, check out the README in the `resplit` directory.
