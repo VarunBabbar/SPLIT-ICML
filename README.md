@@ -32,7 +32,7 @@ model = LicketySPLIT(full_depth_budget=full_depth_budget,reg=regularization)
 ...
 ```
 
-To run RESPLIT
+To run RESPLIT:
 
 
 ```python
@@ -41,8 +41,8 @@ import pandas as pd
 dataset = pd.read_csv('path/to/compas.csv') 
 X,y = dataset.iloc[:,:-1], dataset.iloc[:,-1]
 config = {
-    "regularization": 0.001,
-    "rashomon_bound_multiplier": 0.02, # Sets the Rashomon set threshold as the set of all models which are within `(1+ε)L*` of the best loss `L*`.
+    "regularization": 0.005,
+    "rashomon_bound_multiplier": 0.01, # Sets the Rashomon set threshold as the set of all models which are within `(1+ε)L*` of the best loss `L*`.
     "depth_budget": 5,
     'cart_lookahead_depth': 3,
     "verbose": False
@@ -53,6 +53,8 @@ model.fit(X,y)
 tree = model[0]
 y_pred = tree.predict(X)
 ```
+We have observed that RESPLIT (and TreeFARMS) work best when being called via a command line script (e.g. python3 run_resplit_on_compas.py) or a slurm script as opposed to running it in Jupyter notebooks. The cause for this is yet unknown, but is being investigated. 
+
 We also note the other options in the config which are most commonly used:
 
 1. `rashomon_bound_adder`: A alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within `L* + ε` of the best loss `L*`.
