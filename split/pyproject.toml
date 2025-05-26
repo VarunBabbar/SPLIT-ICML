@@ -7,6 +7,7 @@ build-backend = "scikit_build_core.build"
 name = "split"
 description = "Implementation of General Optimal Sparse Decision Tree"
 readme = "README.md"
+version = "0.1.0" 
 license.file = "LICENSE"
 requires-python = ">=3.9"
 classifiers = [
@@ -24,7 +25,7 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
-dynamic = ["version"]
+# dynamic = ["version"]
 dependencies = [
   "numpy>=1.24.3",
   "scikit-learn>=1.2.2",
@@ -58,8 +59,8 @@ sdist.include = ["src/split/_version.py"]
 
 # This tool is used to generate the version number of the project and 
 # it's wheels, based on the git tags of the current commit.
-[tool.setuptools_scm]
-write_to = "src/split/_version.py"
+# [tool.setuptools_scm]
+# write_to = "src/split/_version.py"
 
 
 [tool.cibuildwheel]
