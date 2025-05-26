@@ -301,7 +301,7 @@ This repository contains the following directories and files:
 - **.github**: Configurations for GitHub action runners.
 - **doc**: Documentation
 - **experiments**: Datasets and their configurations to run experiments
-- **treefarms**: Jupyter notebook, Python implementation and wrappers around C++ implementation
+- **resplit**: Python implementation and wrappers around C++ implementation
 - **include**: Required 3rd-party header-only libraries
 - **log**: Log files
 - **src**: Source files for C++ implementation and Python binding
