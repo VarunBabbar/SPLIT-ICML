@@ -1,0 +1,224 @@
+name: GOSDT CI
+
+# Trigger on pushes to all branches and for all pull-requests
+# Allow to run this workflow manually from the Actions tab
+on: [push, pull_request, workflow_dispatch]
+
+#
+# >> Linux and macOS Builds:
+# Use Python 3.7 ABI3 on Linux and macOS to generate a wheel file that can be used by Python 3.7+.
+#
+# >> Windows Builds:
+# The dynamic library in the wheel file depends on a specific version of the Python runtime library.
+# e.g., `libgosdt.pyd` in a Python 3.7 wheel requires python37.dll, while that in a Python 3.10 wheel requires python310.dll.
+# As such, the CI pipeline generates a wheel for each supported Python version.
+#
+jobs:
+    build:
+        name: ${{ matrix.config.name }}
+        runs-on: ${{ matrix.config.os }}
+        strategy:
+            fail-fast: false
+            matrix:
+                config:
+                    - {
+                        name: "Ubuntu 22.04 x86-64",
+                        os: ubuntu-22.04,
+                        python-major-version: 3,
+                        python-minor-version: 7,
+                    }
+                    - {
+                        name: "CentOS 7 x86-64",
+                        os: ubuntu-22.04,
+                        python-major-version: 3,
+                        python-minor-version: 7,
+                    }
+                    - {
+                        name: "macOS Monterey x86-64",
+                        os: macos-13,
+                        python-major-version: 3,
+                        python-minor-version: 7,
+                    }
+                    - {
+                        name: "macOS Amd",
+                        os: macos-14,
+                        python-major-version: 3,
+                        python-minor-version: 7,
+                    }
+                    - {
+                        name: "Windows Server 2022 x86-64 (Python 3.7)",
+                        os: windows-2022,
+                        python-major-version: 3,
+                        python-minor-version: 7,
+                    }
+                    - {
+                        name: "Windows Server 2022 x86-64 (Python 3.8)",
+                        os: windows-2022,
+                        python-major-version: 3,
+                        python-minor-version: 8,
+                    }
+                    - {
+                        name: "Windows Server 2022 x86-64 (Python 3.9)",
+                        os: windows-2022,
+                        python-major-version: 3,
+                        python-minor-version: 9,
+                    }
+                    - {
+                        name: "Windows Server 2022 x86-64 (Python 3.10)",
+                        os: windows-2022,
+                        python-major-version: 3,
+                        python-minor-version: 10,
+                    }
+        steps:
+            # Checkout the repo
+            - name: Checkout the repo
+              uses: actions/checkout@v3
+            # Install required development tools: Python 3.7+
+            - name: Install required development tools - Python ${{ matrix.config.python-major-version }}.${{ matrix.config.python-minor-version }}
+              uses: actions/setup-python@v4
+              with:
+                  python-version: '${{ matrix.config.python-major-version }}.${{ matrix.config.python-minor-version }}'
+            - name: Verify the Python version
+              run: |
+                  python3 -c "import sys; exit(not (sys.version_info.major == ${{ matrix.config.python-major-version }} and sys.version_info.minor == ${{ matrix.config.python-minor-version }}))"
+            # Install required development tools: Ninja
+            - name: Install required development tools - Ninja (Ubuntu)
+              if: startsWith(matrix.config.name, 'Ubuntu')
+              run: |
+                  sudo apt install -y ninja-build
+            - name: Install required development tools - Ninja (macOS)
+              if: startsWith(matrix.config.name, 'macOS')
+              run: |
+                  brew install ninja
+            - name: Install required development tools - Ninja (Windows)
+              if: startsWith(matrix.config.name, 'Windows')
+              run: |
+                  choco install -y ninja
+            # Install required development tools: pkg-config
+            - name: Install required development tools - pkg-config (Windows)
+              if: startsWith(matrix.config.name, 'Windows')
+              run: |
+                  choco install -y pkgconfiglite --allow-empty-checksums
+            # Install required development tools: scikit-build
+            - name: Install required development tools - scikit-build
+              if: ${{ !startsWith(matrix.config.name, 'CentOS') }}
+              run: |
+                  pip3 install --upgrade scikit-build
+            # Install required development tools: Wheel Fixer
+            - name: Install required development tools - Wheel Fixer (Ubuntu)
+              if: startsWith(matrix.config.name, 'Ubuntu')
+              run: |
+                  pip3 install --upgrade auditwheel
+                  sudo apt install -y patchelf
+            - name: Install required development tools - Wheel Fixer (macOS)
+              if: startsWith(matrix.config.name, 'macOS')
+              run: |
+                  pip3 install --upgrade delocate
+            - name: Install required development tools - Wheel Fixer (Windows)
+              if: startsWith(matrix.config.name, 'Windows')
+              run: |
+                  pip3 install --upgrade delvewheel
+            # Install required 3rd-party libraries
+            - name: Install required 3rd-party libraries (Ubuntu)
+              if: startsWith(matrix.config.name, 'Ubuntu')
+              run: |
+                  sudo apt install -y libtbb-dev
+                  sudo apt install -y libgmp-dev
+            - name: Install required 3rd-party libraries (macOS)
+              if: startsWith(matrix.config.name, 'macOS')
+              run: |
+                  brew install tbb
+                  brew install gmp
+            - name: Install required 3rd-party libraries (Windows)
+              if: startsWith(matrix.config.name, 'Windows')
+              run: |
+                  vcpkg install tbb:x64-windows
+                  vcpkg install gmp:x64-windows
+            # Build the project (Ubuntu, macOS and Windows)
+            - name: Build the project
+              if: ${{ !startsWith(matrix.config.name, 'CentOS') }}
+              run: |
+                  python3 build.py
+            # Build the project (CentOS 7 docker to generate manylinux wheel)
+            # Reference: Using Docker Run inside of GitHub Actions
+            # Link: https://aschmelyun.com/blog/using-docker-run-inside-of-github-actions/
+            - name: Build the wheel with Docker
+              if: startsWith(matrix.config.name, 'CentOS')
+              uses: addnab/docker-run-action@v3
+              with:
+                  image: quay.io/pypa/manylinux2014_x86_64
+                  options: -v ${{ github.workspace }}:/source
+                  run: |
+                      yum install -y zip
+                      yum install -y cmake
+                      yum install -y ninja-build
+                      yum install -y pkgconfig
+                      python3.7 -m pip install --upgrade scikit-build
+                      python3.7 -m pip install --upgrade auditwheel
+                      yum install -y patchelf
+                      git clone https://github.com/Microsoft/vcpkg.git
+                      ./vcpkg/bootstrap-vcpkg.sh
+                      export PATH=/vcpkg:$PATH
+                      export VCPKG_INSTALLATION_ROOT=/vcpkg
+                      vcpkg install tbb
+                      vcpkg install gmp
+                      cd /source
+                      python3.7 build.py
+            # Python 3.7: Run the sample experiment
+            # Windows Builds: Run if and only if the wheel is built by Python 3.7.
+            - name: Install the GOSDT Python module and run the sample experiment (Python 3.7 - Step 1)
+              uses: actions/setup-python@v4
+              with:
+                  python-version: '3.7'
+            - name: Install the GOSDT Python module and run the sample experiment (Python 3.7 - Step 2)
+              if: ${{ !startsWith(matrix.config.name, 'Windows') || (startsWith(matrix.config.name, 'Windows') && matrix.config.python-minor-version == 7) }}
+              run: |
+                  python3 -c "import sys; exit(not (sys.version_info.major == 3 and sys.version_info.minor == 7))"
+                  pip3 install attrs packaging editables pandas scikit-learn sortedcontainers gmpy2 matplotlib
+                  python3 -c "import os; import subprocess; exit(subprocess.run(['pip3', 'install', 'dist/{}'.format(os.listdir('dist')[0])]).returncode)"
+                  python3 treefarms/example.py
+            # Python 3.8: Run the sample experiment
+            # Windows Builds: Run if and only if the wheel is built by Python 3.8.
+            - name: Install the GOSDT Python module and run the sample experiment (Python 3.8 - Step 1)
+              uses: actions/setup-python@v4
+              with:
+                  python-version: '3.8'
+            - name: Install the GOSDT Python module and run the sample experiment (Python 3.8 - Step 2)
+              if: ${{ !startsWith(matrix.config.name, 'Windows') || (startsWith(matrix.config.name, 'Windows') && matrix.config.python-minor-version == 8) }}
+              run: |
+                  python3 -c "import sys; exit(not (sys.version_info.major == 3 and sys.version_info.minor == 8))"
+                  pip3 install attrs packaging editables pandas scikit-learn sortedcontainers gmpy2 matplotlib
+                  python3 -c "import os; import subprocess; exit(subprocess.run(['pip3', 'install', 'dist/{}'.format(os.listdir('dist')[0])]).returncode)"
+                  python3 treefarms/example.py
+            # Python 3.9: Run the sample experiment
+            # Windows Builds: Run if and only if the wheel is built by Python 3.9.
+            - name: Install the GOSDT Python module and run the sample experiment (Python 3.9 - Step 1)
+              uses: actions/setup-python@v4
+              with:
+                  python-version: '3.9'
+            - name: Install the GOSDT Python module and run the sample experiment (Python 3.9 - Step 2)
+              if: ${{ !startsWith(matrix.config.name, 'Windows') || (startsWith(matrix.config.name, 'Windows') && matrix.config.python-minor-version == 9) }}
+              run: |
+                  python3 -c "import sys; exit(not (sys.version_info.major == 3 and sys.version_info.minor == 9))"
+                  pip3 install attrs packaging editables pandas scikit-learn sortedcontainers gmpy2 matplotlib
+                  python3 -c "import os; import subprocess; exit(subprocess.run(['pip3', 'install', 'dist/{}'.format(os.listdir('dist')[0])]).returncode)"
+                  python3 treefarms/example.py
+            # Python 3.10: Run the sample experiment
+            # Windows Builds: Run if and only if the wheel is built by Python 3.10.
+            - name: Install the GOSDT Python module and run the sample experiment (Python 3.10 - Step 1)
+              uses: actions/setup-python@v4
+              with:
+                  python-version: '3.10'
+            - name: Install the GOSDT Python module and run the sample experiment (Python 3.10 - Step 2)
+              if: ${{ !startsWith(matrix.config.name, 'Windows') || (startsWith(matrix.config.name, 'Windows') && matrix.config.python-minor-version == 10) }}
+              run: |
+                  python3 -c "import sys; exit(not (sys.version_info.major == 3 and sys.version_info.minor == 10))"
+                  pip3 install attrs packaging editables pandas scikit-learn sortedcontainers gmpy2 matplotlib
+                  python3 -c "import os; import subprocess; exit(subprocess.run(['pip3', 'install', 'dist/{}'.format(os.listdir('dist')[0])]).returncode)"
+                  python3 treefarms/example.py
+            # Upload the wheel file
+            - name: Upload the wheel file
+              uses: actions/upload-artifact@v4
+              with:
+                  name: Artifacts-${{ matrix.config.os }}
+                  path: dist/*.whl

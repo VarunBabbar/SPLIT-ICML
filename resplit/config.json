@@ -1,0 +1,50 @@
+{
+    "balance": false,
+    "cancellation": true,
+    "look_ahead": true,
+    "similar_support": false,
+    "feature_exchange": false,
+    "continuous_feature_exchange": false,
+    "rule_list": false,
+  
+    "diagnostics": false,
+    "verbose": true,
+  
+    "regularization": 0.05,
+    "uncertainty_tolerance": 0.0,
+    "upperbound": 0.0,
+  
+    "model_limit": 10000,
+    "precision_limit": 0,
+    "stack_limit": 0,
+    "tile_limit": 0,
+    "time_limit": 0,
+    "worker_limit": 1,
+  
+    "costs": "",
+    "model": "",
+    "rashomon_model": "",
+    "rashomon_trie": "",
+    "rashomon_model_set_suffix": "",
+    "profile": "",
+    "timing": "",
+    "trace": "",
+    "tree": "",
+    "datatset_encoding": "",
+
+    "depth_budget": 0,
+    
+    "minimum_captured_points": 0,
+
+    "memory_checkpoints": [],
+    
+    "output_objective_model_set": false, 
+    "output_covered_sets": [],
+    "covered_sets_thresholds": [],
+
+    "rashomon": true, 
+    "rashomon_bound": 0,
+    "rashomon_bound_multiplier": 0.3,
+    "rashomon_bound_adder": 0,
+    "rashomon_ignore_trivial_extensions": true
+  }
