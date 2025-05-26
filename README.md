@@ -42,7 +42,7 @@ dataset = pd.read_csv('path/to/compas.csv')
 X,y = dataset.iloc[:,:-1], dataset.iloc[:,-1]
 config = {
     "regularization": 0.001,
-    "rashomon_bound_multiplier": 0.02,
+    "rashomon_bound_multiplier": 0.02, # Sets the Rashomon set threshold as the set of all models which are within `(1+ε)L*` of the best loss `L*`.
     "depth_budget": 5,
     'cart_lookahead_depth': 3,
     "verbose": False
@@ -55,4 +55,5 @@ y_pred = tree.predict(X)
 ```
 We also note the other options in the config which are most commonly used:
 
-1. `rashomon_bound_adder`: A replacement for `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within `L* + ε` of the best loss `L*`.
+1. `rashomon_bound_adder`: A alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within `L* + ε` of the best loss `L*`.
+2. `rashomon_bound`: An alternative to for `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within the rashomon bound. This is a hard loss instead of a relative `ε` threshold. 
