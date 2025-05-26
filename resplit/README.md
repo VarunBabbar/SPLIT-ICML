@@ -16,7 +16,6 @@ TreeFARMS builds on a number of innovations for scalable construction of optimal
 - [Configuration](#configuration)
 - [Example](#example)
 - [Repository Structure](#structure)
-- [License](#license)
 - [FAQs](#faqs)
 
 ---
@@ -113,13 +112,13 @@ The configuration is a JSON object and has the following structure and default v
 - Values: Decimal > 0
 - Description: Used to set the Rashomon bound. Directly setting the Rashomon bound if it is known. Mutually exclusive with `rashomon_bound_multiplier` and `rashomon_bound_adder`.
 - Default: 0
-- **Warning: The size of Rashomon set increasing exponentially w.r.t. this argument.**
+- **Warning: The size of Rashomon set increases exponentially w.r.t. this argument.**
 
 **rashomon_bound_adder**
 - Values: Decimal > 0
 - Description: Used to set the Rashomon bound. Rashomon bound = rashomon_bound_adder + optimal objective value. Mutually exclusive with `rashomon_bound` and `rashomon_bound_multiplier`.
 - Default: 0
-- **Warning: The size of Rashomon set increasing exponentially w.r.t. this argument.**
+- **Warning: The size of Rashomon set increases exponentially w.r.t. this argument.**
 
 **output_accuracy_model_set**
  - Values: true or false
@@ -311,13 +310,6 @@ The configuration is a JSON object and has the following structure and default v
  - Special Case: When set to empty string, no snapshots are stored.
  - Default: Empty string
 
----
-# Example
-
-Example code to run TreeFARMS with threshold guessing, lower bound guessing, and depth limit. The example python file is available in [treefarms/example.py](/treefarms/example.py). A tutorial ipython notebook is available in [treefarms/tutorial.ipynb](/treefarms/tutorial.ipynb).  
-
----
-
 # Structure
 
 This repository contains the following directories and files:
@@ -338,15 +330,7 @@ This repository contains the following directories and files:
 
 # FAQs
 
-If you run into any issues when running TreeFARMS, consult the [**FAQs**](/doc/faqs.md) first. 
-
----
-
-# License
-
-This software is licensed under a 3-clause BSD license (see the LICENSE file for details). 
-
----
+If you run into any issues when running RESPLIT, consult the [**FAQs**](/doc/faqs.md) first. 
 
 ## Related Work
 [1] Aglin, G.; Nijssen, S.; and Schaus, P. 2020. Learning optimal decision trees using caching branch-and-bound search. In _AAAI Conference on Artificial Intelligence_, volume 34, 3146–3153.
