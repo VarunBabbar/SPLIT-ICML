@@ -14,9 +14,7 @@ TreeFARMS builds on a number of innovations for scalable construction of optimal
 
 # Table of Content
 - [Installation](#installation)
-- [Compilation](#compilation)
 - [Configuration](#configuration)
-- [Example](#example)
 - [Repository Structure](#structure)
 - [FAQs](#faqs)
 
@@ -24,22 +22,7 @@ TreeFARMS builds on a number of innovations for scalable construction of optimal
 
 # Installation
 
-You may use the following commands to install TreeFARMS along with its dependencies on macOS, Ubuntu and Windows.  
-You need **Python 3.7 or later** to use the module `treefarms` in your project. If you encountered an error `ERROR: Could not find a version that satisfies the requirement treefarms`, try updating your pip to the latest version. 
-
-```bash
-pip3 install attrs packaging editables pandas scikit-learn sortedcontainers gmpy2 matplotlib
-pip3 install treefarms
-```
-
-You can find a list of available wheels on [PyPI](https://pypi.org/project/treefarms/).  
-Please feel free to open an issue if you do not see your distribution offered.
-
----
-
-# Compilation
-
-Please refer to the [manual](doc/build.md) to build the C++ command line interface and the Python extension module and run the experiment with example datasets on your machine.
+Please see installation instructions in the parent repository (alongside an example). 
 
 ---
 
