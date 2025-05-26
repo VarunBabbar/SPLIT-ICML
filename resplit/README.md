@@ -10,8 +10,6 @@ To make TreeFARMS run faster, please use the options to limit the depth of the t
 
 TreeFARMS builds on a number of innovations for scalable construction of optimal tree-based classifiers: Scalable Bayesian Rule Lists[[8](#related-work)], CORELS[[2](#related-work)], OSDT[[4](#related-work)], and, most closely, GOSDT[[5](#related-work)]. 
 
-**Note: this repository is built based on [Fast Sparse Decision Tree Optimization via Reference Ensembles](https://github.com/ubc-systopia/gosdt-guesses). Package is renamed to allow the installation of both packages. In this repository, all references to GOSDT refers to TreeFARMS algorithm.**
-
 # Table of Content
 - [Installation](#installation)
 - [Configuration](#configuration)
