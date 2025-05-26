@@ -55,9 +55,6 @@ void Optimizer::rash_models_inner(key_type const & identifier, results_t & resul
     vertex_accessor task_accessor;
     if (State::graph.vertices.find(task_accessor, identifier) == false) { return; }
     Task & task = task_accessor -> second;
-    //std::cout << "Base Condition: " << task.base_objective() << " <= " << task.upperbound() << " = " << (int)(task.base_objective() <= task.upperbound()) << std::endl;
-
-    // std::cout << "Capture: " << task.capture_set().to_string() << std::endl;
 
     if (task.maximum_scope > 0) {
         re_explore_count++;
@@ -74,20 +71,8 @@ void Optimizer::rash_models_inner(key_type const & identifier, results_t & resul
     auto& storage = results.second;
 
     if (task.base_objective() <= scope + std::numeric_limits<float>::epsilon()) {
-        // || (Configuration::rule_list && task.capture_set().count() != task.capture_set().size())) {
-        // std::cout << "Stump" << std::endl;
-        // std::shared_ptr<key_type> stump(new Tile(set));
-        // Model stump_key(stump_set); // shallow variant
-        // Model * stump_address = new Model(stump_set);
-        //std::cout << task.rashomon_bound() << std::endl;
-
-
         model_set_p model(new ModelSet(std::shared_ptr<Bitmask>(new Bitmask(task.capture_set()))));
-        insert_leaf_to_results(results, model);        
-        // std::shared_ptr<Model> model(new Model(std::shared_ptr<Bitmask>(new Bitmask(task.capture_set()))));
-        // model -> identify(identifier);
-        // model -> translate_self(task.order());
-        // results.insert(model);
+        insert_leaf_to_results(results, model);
     } else {
         pruned_leaves_with_scope++;
     }

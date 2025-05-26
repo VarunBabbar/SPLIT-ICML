@@ -20,6 +20,51 @@ def get_num_leaves_greedy(model):
 
 class RESPLIT(resplit.model.treefarms.TREEFARMS):
     def __init__(self, config, load_path=False, fill_tree = 'optimal',save_trie_tmp = True):
+        """
+        Initialize the RESPLIT algorithm, a hybrid method that first enumerates near-optimal prefix trees 
+        using TREEFARMS and then fills their leaves using one of three strategies: greedy, optimal, or 
+        TREEFARMS itself. This enables approximate exploration of the Rashomon set much faster than using TREEFARMS naively
+
+        Parameters
+        ----------
+        config : dict
+            A dictionary of hyperparameters and settings. Must include keys such as:
+                - 'regularization': float
+                - 'depth_budget': int
+                - 'rashomon_bound_multiplier': float
+                - (optional) 'fill_tree': {'greedy', 'optimal', 'treefarms'}
+
+        load_path : str or bool, default=False
+            If provided (i.e., not False), loads a precomputed Rashomon prefix set from the given path instead of recomputing it.
+            The path should point to a pickled object containing a dict with key 'rset'.
+
+        fill_tree : str, default='optimal'
+            Strategy for filling leaves of the prefix trees. Options:
+                - 'greedy'     : fill leaves using a greedy splitting heuristic
+                - 'optimal'    : fill leaves using optimal trees (e.g., via GOSDT)
+                - 'treefarms'  : fill leaves using TREEFARMS subtrees
+
+        save_trie_tmp : bool, default=True
+            If True, sets a temporary file path in `config['rashomon_trie']` to store the Rashomon prefix trie
+            based on the current config values. Used internally for caching and reproducibility.
+
+        Attributes
+        ----------
+        models : list
+            A list of decision trees (or sets of trees, if `fill_tree='treefarms'`) generated from the Rashomon prefix set.
+
+        num_models : int
+            Total number of trees stored when `fill_tree='treefarms'`.
+
+        num_models_per_prefix : list
+            Number of trees generated for each prefix when using TREEFARMS subtree expansion.
+
+        classes : list
+            Class labels used for prediction and remapping.
+
+        rashomon_set_prefix : TREEFARMS
+            The initial Rashomon prefix tree generator (either computed or loaded from disk).
+        """
         self.config = config
         if 'fill_tree' not in self.config:
             self.fill_tree = fill_tree
@@ -70,11 +115,11 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
                 obj = tree_loss + self.config['regularization']*tree_leaves
                 self.models.append(tree)
             elif self.fill_tree == 'treefarms':
-                start_time = time.time()
+                # start_time = time.time()
                 trees = self.fill_leaves_with_treefarms(tree, X, y)
-                end_time = time.time()
-                print("Time taken to fill leaves with treefarms: ",
-                      end_time-start_time)
+                # end_time = time.time()
+                # print("Time taken to fill leaves with treefarms: ",
+                    #   end_time-start_time)
                 num_models, trees = self.enumerate_treefarms_subtrees(trees)
                 self.num_models += num_models
                 self.num_models_per_prefix.append(num_models)

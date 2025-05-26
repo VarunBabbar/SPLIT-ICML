@@ -49,7 +49,6 @@ void Model::_partitions(std::vector<Bitmask *> &addresses) const {
 void Model::partitions(std::vector<Bitmask *> &sorted_addresses) const {
     std::vector<Bitmask *> addresses;
     _partitions(addresses);
-    // std::cout << "_partition size: " << addresses.size() << std::endl;
     std::map<unsigned int, Bitmask *> sorted;
     // for (auto it = addresses.begin(); it != addresses.end(); ++it) {
     //     Bitmask * address = * it;
@@ -69,22 +68,17 @@ void Model::partitions(std::vector<Bitmask *> &sorted_addresses) const {
     for (auto it = addresses.begin(); it != addresses.end(); ++it) {
         sorted_addresses.push_back(*it);
     }
-    // std::cout << "partition size: " << sorted_addresses.size() << std::endl;
     return;
 };
 
 size_t const Model::hash(void) const {
-    // std::cout << "hash functiion entry" << std::endl;
 
     std::vector<Bitmask *> addresses;
     partitions(addresses);
     size_t seed = addresses.size();
-    // std::cout << "final partition size: " << addresses.size() << std::endl;
     for (auto it = addresses.begin(); it != addresses.end(); ++it) {
-        // std::cout << "partition: " << (**it).to_string() << std::endl;
         seed ^= ((**it).hash()) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
-    // std::cout << "hash: " << seed << std::endl;
     return seed;
 }
 

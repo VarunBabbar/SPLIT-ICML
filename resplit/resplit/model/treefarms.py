@@ -68,7 +68,7 @@ class TREEFARMS:
         # self.utime = treefarms.utime()
 
         if treefarms.status() == 0:
-            print("treefarms reported successful execution")
+            # print("treefarms reported successful execution")
             self.timeout = False
         elif treefarms.status() == 2:
             print("treefarms reported possible timeout.")
@@ -86,7 +86,7 @@ class TREEFARMS:
         self.dataset = dataset
         self.model_set = ModelSetContainer(result)
 
-        print(f"training completed. Number of trees in the Rashomon set: {self.model_set.get_tree_count()}")
+        # print(f"training completed. Number of trees in the Rashomon set: {self.model_set.get_tree_count()}")
 
 
     def fit(self, X, y):
