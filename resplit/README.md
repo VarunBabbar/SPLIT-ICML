@@ -2,11 +2,11 @@
 
 This code creates approximate *Rashomon sets* of decision trees using the RESPLIT algorithm. The Rashomon set is the set of all almost-optimal models. This code is able to enumerate the Rashomon set for sparse decision trees. In other words, instead of returning a single optimal decision tree, it returns a set of decision trees with an objective (misclassification loss with a penalty on the number of leaves) below a pre-defined threshold. 
 
-The code largely builds on the TREEFARMS and GOSDT codebases. To learn more about TreeFARMS, please read the [research paper](https://arxiv.org/abs/2209.08040) (published at NeurIPS'22). To learn about GOSDT, please read the [research paper](https://arxiv.org/pdf/2006.08690)) (published at ICML'20)
+The code largely builds on the TREEFARMS codebase. To learn more about TreeFARMS, please read the [research paper](https://arxiv.org/abs/2209.08040) (published at NeurIPS'22).
 
 Given the Rashomon set enumerated by this code, an interactive tool [TimberTrek](https://github.com/poloclub/timbertrek) can be used to visualize and explore this set of trees. 
 
-To make TreeFARMS run faster, please use the options to limit the depth of the tree, and increase the regularization parameter above 0.02. If you run the algorithm without a depth constraint or set the regularization too small, it will run more slowly.
+To make TreeFARMS run faster, please use the options to limit the depth of the tree, and increase the regularization parameter above 0.01. If you run the algorithm without a depth constraint or set the regularization too small, it will run more slowly.
 
 TreeFARMS builds on a number of innovations for scalable construction of optimal tree-based classifiers: Scalable Bayesian Rule Lists[[8](#related-work)], CORELS[[2](#related-work)], OSDT[[4](#related-work)], and, most closely, GOSDT[[5](#related-work)]. 
 
