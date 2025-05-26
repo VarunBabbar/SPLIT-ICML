@@ -50,8 +50,9 @@ config = {
 model = RESPLIT(config, fill_tree = "treefarms")
 # find the set of near optimal lookahead prefixes, and fill each leaf of each prefix with another TreeFARMS Rashomon set. See function for more options.
 model.fit(X,y)
-tree = model[0]
-y_pred = tree.predict(X)
+tree = model[i] # get the ith tree
+print(tree)
+y_pred = model.predict(X,i) # predictions for the ith tree
 ```
 For now, we recommend running RESPLIT via a command line script (e.g. python3 run_resplit_on_compas.py) or a slurm script rather than in a Jupyter notebook. We have observed some timeout issues in Jupyter and are investigating these actively.  
 
