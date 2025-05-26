@@ -55,4 +55,4 @@ y_pred = tree.predict(X)
 ```
 We also note the other options in the config which are most commonly used:
 
-1. `rashomon_bound_adder`: A replacement for `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within \( L^* + \epsilon \) of the best loss \( L^* \).
+1. `rashomon_bound_adder`: A replacement for `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within `L* + ε` of the best loss `L*`.
