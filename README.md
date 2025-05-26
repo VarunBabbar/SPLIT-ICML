@@ -56,4 +56,6 @@ y_pred = tree.predict(X)
 We also note the other options in the config which are most commonly used:
 
 1. `rashomon_bound_adder`: A alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within `L* + ε` of the best loss `L*`.
-2. `rashomon_bound`: An alternative to for `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within the rashomon bound. This is a hard loss instead of a relative `ε` threshold. 
+2. `rashomon_bound`: An alternative to for `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within the rashomon bound. This is a hard loss instead of a relative `ε` threshold.
+
+For more config options, check out the README in the `resplit` directory.
