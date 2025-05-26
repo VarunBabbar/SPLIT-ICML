@@ -2,7 +2,7 @@
 Official code for the ICML 2025 Spotlight paper "Near Optimal Decision Trees in a SPLIT Second" 
 
 # Installation Instructions
-This repository contains implementations of both packages used and described in the paper. First cd into this repository. Then install both SPLIT and RESPLIT via the following. 
+This repository contains implementations of both packages used and described in the paper. First `cd` into this repository. Then install both SPLIT and RESPLIT via the following. 
 ```bash
 pip install resplit/ split/
 ```
@@ -48,17 +48,18 @@ config = {
     "verbose": False
 }
 model = RESPLIT(config, fill_tree = "treefarms")
-# find the set of near optimal lookahead prefixes, and fill each leaf of each prefix with another TreeFARMS Rashomon set. See function for more options.
+# Options for fill_tree: "treefarms", "optimal", "greedy". "treefarms" will fill each leaf of each prefix with another TreeFARMS Rashomon set. "optimal" will complete prefixes using GOSDT. "greedy" will do so using greedy completions. 
 model.fit(X,y)
-tree = model[0]
-y_pred = tree.predict(X)
+tree = model[i] # get the ith tree
+print(tree)
+y_pred = model.predict(X,i) # predictions for the ith tree
 ```
 For now, we recommend running RESPLIT via a command line script (e.g. python3 run_resplit_on_compas.py) or a slurm script rather than in a Jupyter notebook. We have observed some timeout issues in Jupyter and are investigating these actively.  
 
 We also note the other options in the config which are most commonly used:
 
 1. `rashomon_bound_adder`: A alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within `L* + ε` of the best loss `L*`.
-2. `rashomon_bound`: An alternative to for `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within the rashomon bound. This is a hard loss instead of a relative `ε` threshold.
+2. `rashomon_bound`: An alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within the rashomon bound. This is a hard loss instead of a relative `ε` threshold.
 
 
 For more config options, check out the README in the `resplit` directory.
