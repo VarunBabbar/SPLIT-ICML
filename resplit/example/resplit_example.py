@@ -48,7 +48,7 @@ def main():
         "--data",
         type=str,
         required=False,
-        default="datasets/compas.csv",
+        default="compas.csv",
         help="Path to CSV dataset with binary label in last column"
     )
     args = parser.parse_args()
