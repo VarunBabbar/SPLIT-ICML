@@ -6,9 +6,7 @@ The code largely builds on the TREEFARMS codebase. To learn more about TreeFARMS
 
 Given the Rashomon set enumerated by this code, an interactive tool [TimberTrek](https://github.com/poloclub/timbertrek) can be used to visualize and explore this set of trees. 
 
-To make TreeFARMS run faster, please use the options to limit the depth of the tree, and increase the regularization parameter above 0.01. If you run the algorithm without a depth constraint or set the regularization too small, it will run more slowly.
-
-TreeFARMS builds on a number of innovations for scalable construction of optimal tree-based classifiers: Scalable Bayesian Rule Lists[[8](#related-work)], CORELS[[2](#related-work)], OSDT[[4](#related-work)], and, most closely, GOSDT[[5](#related-work)]. 
+To make RESPLIT run faster, please use the options to limit the depth of the tree, and increase the regularization parameter above 0.01. If you run the algorithm without a depth constraint or set the regularization too small, it will run more slowly.
 
 # Table of Content
 - [Installation](#installation)
