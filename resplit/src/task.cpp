@@ -34,7 +34,6 @@ Task::Task(Bitmask const & capture_set, Bitmask const & feature_set, unsigned in
             this -> _upperbound = this -> _base_objective;
             this -> _feature_set.clear();
         } else if (Configuration::cart_lookahead_depth != 0 && capture_set.get_depth_budget() == 1) {
-            std::cout << "Using CART lookahead" << std::endl;
             // Set cart depth to max(1, depth_budget - cart_lookahead_depth), while being careful with unsigned chars
             unsigned char depth_for_cart = 1;
             if (Configuration::cart_lookahead_depth < Configuration::depth_budget) {
