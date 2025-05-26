@@ -42,7 +42,7 @@ dataset = pd.read_csv('path/to/compas.csv')
 X,y = dataset.iloc[:,:-1], dataset.iloc[:,-1]
 config = {
     "regularization": 0.001,
-    "rashomon_bound_multiplier": 0.01,
+    "rashomon_bound_multiplier": 0.02,
     "depth_budget": 5,
     'cart_lookahead_depth': 3,
     "verbose": False
