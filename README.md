@@ -53,7 +53,9 @@ model.fit(X,y)
 tree = model[0]
 y_pred = tree.predict(X)
 ```
-We have observed that RESPLIT (and TreeFARMS) run faster when being called via a command line script (e.g. python3 run_resplit_on_compas.py) or a slurm script as opposed to running it in Jupyter notebooks. The cause for this is yet unknown, but is being investigated. 
+For now, we recommend running RESPLIT via a command line script (e.g. python3 run_resplit_on_compas.py) or a slurm script rather than in a Jupyter notebook. We have observed some timeout issues in Jupyter and are investigating these actively.  
+
+The cause for this is yet unknown, but is being investigated. 
 
 We also note the other options in the config which are most commonly used:
 
