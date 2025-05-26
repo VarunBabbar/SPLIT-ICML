@@ -23,7 +23,7 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
         """
         Initialize the RESPLIT algorithm, a hybrid method that first enumerates near-optimal prefix trees 
         using TREEFARMS and then fills their leaves using one of three strategies: greedy, optimal, or 
-        TREEFARMS itself. This enables exploration of the Rashomon set through fine-grained subtree expansion.
+        TREEFARMS itself. This enables approximate exploration of the Rashomon set much faster than using TREEFARMS naively
 
         Parameters
         ----------
