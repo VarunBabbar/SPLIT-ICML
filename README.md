@@ -53,12 +53,12 @@ tree = model[i] # get the ith tree
 print(tree)
 y_pred = model.predict(X,i) # predictions for the ith tree
 ```
-For now, we recommend running RESPLIT via a command line script (e.g. python3 run_resplit_on_compas.py) or a slurm script rather than in a Jupyter notebook. We have observed some timeout issues in Jupyter and are investigating these actively. There is an example in resplit/example where you can first run `pip install treefarms` and then the script `python3 resplit_example.py" to see the difference in runtime between TreeFARMS and RESPLIT. 
-
-We also note the other options in the config which are most commonly used:
-
-1. `rashomon_bound_adder`: A alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within `L* + ε` of the best loss `L*`.
-2. `rashomon_bound`: An alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within the rashomon bound. This is a hard loss instead of a relative `ε` threshold.
+Some notes:
+1. For now, we recommend running RESPLIT via a command line script (e.g. python3 run_resplit_on_compas.py) or a slurm script rather than in a Jupyter notebook. We have observed some timeout issues in Jupyter and are investigating these actively.
+2. There is an example in resplit/example where you can first run `pip install treefarms` and then the script `python3 resplit_example.py" to see the difference in runtime between TreeFARMS and RESPLIT.
+3. We also note the other options in the config which are most commonly used:
+    a. `rashomon_bound_adder`: A alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within `L* + ε` of the best loss `L*`.
+    b. `rashomon_bound`: An alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models which are within the rashomon bound. This is a hard loss instead of a relative `ε` threshold.
 
 
 For more config options, check out the README in the `resplit` directory.
