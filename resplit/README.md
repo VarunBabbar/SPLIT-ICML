@@ -1,6 +1,8 @@
-# Exploring the Whole Rashomon Set of Sparse Decision Trees (TreeFARMS)
+# Rashomon Set Estimation with SPLIT (RESPLIT)
 
-This code creates *Rashomon sets* of decision trees. The Rashomon set is the set of all almost-optimal models. This code is able to enumerate the Rashomon set for sparse decision trees. In other words, instead of returning a single optimal decision tree, it returns a set of decision trees with an objective (misclassification loss with a penalty on the number of leaves) below a pre-defined threshold. To learn more about TreeFARMS, please read our [research paper](https://arxiv.org/abs/2209.08040) (published at NeurIPS'22). 
+This code creates approximate *Rashomon sets* of decision trees using the RESPLIT algorithm. The Rashomon set is the set of all almost-optimal models. This code is able to enumerate the Rashomon set for sparse decision trees. In other words, instead of returning a single optimal decision tree, it returns a set of decision trees with an objective (misclassification loss with a penalty on the number of leaves) below a pre-defined threshold. 
+
+The code largely builds on the TREEFARMS and GOSDT codebases. To learn more about TreeFARMS, please read the [research paper](https://arxiv.org/abs/2209.08040) (published at NeurIPS'22). To learn about GOSDT, please read the [research paper](https://arxiv.org/pdf/2006.08690)) (published at ICML'20)
 
 Given the Rashomon set enumerated by this code, an interactive tool [TimberTrek](https://github.com/poloclub/timbertrek) can be used to visualize and explore this set of trees. 
 
