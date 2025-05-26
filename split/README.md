@@ -17,7 +17,7 @@ dataset = pd.read_csv('compas.csv')
 X,y = dataset.iloc[:,:-1], dataset.iloc[:,-1]
 full_depth_budget = 5
 regularization = 0.01
-model = SPLIT(lookahead_depth_budget=lookahead_depth, time_limit=args.time_limit, reg=regularization, full_depth_budget=full_depth_budget, verbose=False, binarize=False)
+model = SPLIT(lookahead_depth_budget=lookahead_depth, time_limit=100, reg=regularization, full_depth_budget=full_depth_budget, verbose=False, binarize=False)
 # set binarize = True if dataset is not binarized.
 model.fit(X,y)
 y_pred = model.predict(X)
