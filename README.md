@@ -7,7 +7,7 @@ This repository contains implementations of both packages used and described in 
 pip install resplit/ split/
 ```
 
-To use SPLIT / LicketySPLIT:
+To use SPLIT:
 
 ```python
 from split import SPLIT
