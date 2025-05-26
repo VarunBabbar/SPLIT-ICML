@@ -1,6 +1,6 @@
 import builtins
 import sys
-import treefarms
+import resplit
 import numpy as np
 import pandas as pd
 import time
@@ -8,9 +8,9 @@ from tqdm import tqdm
 from split import GOSDTClassifier
 from split._tree import Node, Leaf
 import split
-from treefarms import TREEFARMS
-from treefarms.helper_functions_resplit import are_trees_same
-from treefarms.helper_functions_resplit import get_num_leaves_gosdt, _tree_to_dict
+from resplit import TREEFARMS
+from resplit.helper_functions_resplit import are_trees_same
+from resplit.helper_functions_resplit import get_num_leaves_gosdt, _tree_to_dict
 import os
 
 def get_num_leaves_greedy(model):
@@ -18,7 +18,7 @@ def get_num_leaves_greedy(model):
         return 1
     return get_num_leaves_greedy(model.left_child) + get_num_leaves_greedy(model.right_child)
 
-class RESPLIT(treefarms.model.treefarms.TREEFARMS):
+class RESPLIT(resplit.model.treefarms.TREEFARMS):
     def __init__(self, config, load_path=False, fill_tree = 'optimal',save_trie_tmp = True):
         self.config = config
         if 'fill_tree' not in self.config:

@@ -17,14 +17,14 @@ if platform.system() == "Windows" or (platform.system() == "Linux" and distro.id
 print("Additional CMake Arguments = {}".format(cmake_args))
 
 setup(
-    name="treefarms",
+    name="resplit",
     version="0.2.4",
     description="Implementation of Trees FAst RashoMon Sets",
     author="UBC Systopia Research Lab",
     url="https://github.com/ubc-systopia/treeFarms",
     license="BSD 3-Clause",
     packages=find_packages(where='.'),
-    cmake_install_dir="treefarms",
+    cmake_install_dir="resplit",
     cmake_args=cmake_args,
     python_requires=">=3.7",
     long_description=pathlib.Path("README_PyPI.md").read_text(encoding="utf-8"),

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Project `Name` and `Language`
-project(TREEFARMS)
+project(RESPLIT)
 
 # Set the language standard to `c++11`
 set(CMAKE_CXX_STANDARD 11)
@@ -33,8 +33,8 @@ endif()
 #
 
 # Target Definition
-set(TARGET_CLI "treefarms")
-set(TARGET_TESTS "treefarms_tests")
+set(TARGET_CLI "resplit")
+set(TARGET_TESTS "resplit_tests")
 set(TARGET_PYTHON "libgosdt")
 
 # Target: TREEFARMS CLI

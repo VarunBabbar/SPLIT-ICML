@@ -78,7 +78,7 @@ if __name__ == '__main__':
     try:
         print(">> Cleaning the garbage...")
         remove_dir_if_exists("dist")
-        remove_dir_if_exists("treefarms.egg-info")
+        remove_dir_if_exists("resplit.egg-info")
         setup(["clean"])
 
         print(">> Rebuilding the project from scratch...")

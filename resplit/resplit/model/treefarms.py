@@ -5,11 +5,11 @@ from numpy import array
 from sklearn.metrics import confusion_matrix, accuracy_score
 import timbertrek
 
-import treefarms.libgosdt as treefarms # Import the TREEFARMS extension ()
-from treefarms.model.encoder import Encoder
-from treefarms.model.imbalance.osdt_imb_v9 import bbound, predict # Import the special objective implementation
-from treefarms.model.tree_classifier import TreeClassifier # Import the tree classification model
-from treefarms.model.model_set import ModelSetContainer
+import resplit.libgosdt as treefarms # Import the TREEFARMS extension ()
+from resplit.model.encoder import Encoder
+from resplit.model.imbalance.osdt_imb_v9 import bbound, predict # Import the special objective implementation
+from resplit.model.tree_classifier import TreeClassifier # Import the tree classification model
+from resplit.model.model_set import ModelSetContainer
 
 class TREEFARMS:
     def __init__(self, configuration={}):

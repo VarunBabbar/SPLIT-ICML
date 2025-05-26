@@ -1,6 +1,6 @@
 import numpy as np
 from tqdm import tqdm
-from treefarms.model.tree_classifier import (
+from resplit.model.tree_classifier import (
     TreeClassifier,
 )  # Import the tree classification model
 

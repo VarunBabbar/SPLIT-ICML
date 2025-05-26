@@ -10,8 +10,8 @@ from gmpy2 import mpz
 from matplotlib import pyplot as plt
 import pickle
 
-from treefarms.model.imbalance.rule import make_all_ones, rule_vand, rule_vectompz, count_ones, rule_mpztovec
-from treefarms.model.imbalance.osdt_sup import log, gini_reduction, get_code, cart, get_z
+from resplit.model.imbalance.rule import make_all_ones, rule_vand, rule_vectompz, count_ones, rule_mpztovec
+from resplit.model.imbalance.osdt_sup import log, gini_reduction, get_code, cart, get_z
 
 class Objective: 
     def __init__(self, name, P, N, lamb): 
