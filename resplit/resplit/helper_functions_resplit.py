@@ -17,7 +17,7 @@ def _num_leaves(tree_as_dict) -> int:
 
 
 def _tree_to_dict(node, classes):
-    if isinstance(node, gosdt._tree.Leaf):
+    if isinstance(node, split._tree.Leaf):
         return {'prediction': classes[node.prediction]}
     else:
         return {"feature": node.feature,

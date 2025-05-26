@@ -49,7 +49,7 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
 
         self.remaining_depth = self.config['depth_budget'] - \
             self.config['cart_lookahead_depth']+1
-
+        print("Found set of near optimal prefixes. Filling in their leaves now.")
         for i in tqdm(range(self.rashomon_set_prefix.get_tree_count())):
             tree_dict = vars(self.rashomon_set_prefix[i])['source']
             tree = self.dict_to_tree(tree_dict, X, y)
