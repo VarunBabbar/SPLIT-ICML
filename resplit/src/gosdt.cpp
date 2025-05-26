@@ -100,7 +100,7 @@ void GOSDT::fit(std::istream & data_source, results_t & results) {
         if (Configuration::rashomon_bound != 0) {
             rashomon_bound = Configuration::rashomon_bound;
         } else {
-            std::cout << "Finding Optimal Objective..." << std::endl;
+            // std::cout << "Finding Optimal Objective..." << std::endl;
 
             fit_gosdt(optimizer, models);
 

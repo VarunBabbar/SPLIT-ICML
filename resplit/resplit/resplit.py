@@ -115,11 +115,11 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
                 obj = tree_loss + self.config['regularization']*tree_leaves
                 self.models.append(tree)
             elif self.fill_tree == 'treefarms':
-                start_time = time.time()
+                # start_time = time.time()
                 trees = self.fill_leaves_with_treefarms(tree, X, y)
-                end_time = time.time()
-                print("Time taken to fill leaves with treefarms: ",
-                      end_time-start_time)
+                # end_time = time.time()
+                # print("Time taken to fill leaves with treefarms: ",
+                    #   end_time-start_time)
                 num_models, trees = self.enumerate_treefarms_subtrees(trees)
                 self.num_models += num_models
                 self.num_models_per_prefix.append(num_models)

@@ -20,7 +20,6 @@ void Optimizer::models(key_type const &identifier,
     }
     Task &task = task_accessor->second;
 
-    // std::cout << "Capture: " << task.capture_set().to_string() << std::endl;
     if (task.base_objective() <= task.upperbound() + std::numeric_limits<float>::epsilon()) {
         Model *model = new Model(std::shared_ptr<Bitmask>(new Bitmask(task.capture_set())), m_dataset,
                                  m_local_states[0].column_buffer);
@@ -36,13 +35,11 @@ void Optimizer::models(key_type const &identifier,
     }
 
     for (bound_iterator iterator = bounds->second.begin(); iterator != bounds->second.end(); ++iterator) {
-        // std::cout << "Bound" << std::endl;
 
         if (std::get<2>(*iterator) > task.upperbound() + std::numeric_limits<float>::epsilon()) {
             continue;
         }
         int feature = std::get<0>(*iterator);
-        // std::cout << "Feature: " << feature << std::endl;
         std::unordered_set<Model *> negatives;
         std::unordered_set<Model *> positives;
         bool ready = true;
