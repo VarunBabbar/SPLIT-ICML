@@ -1,6 +1,6 @@
 # Rashomon Set Estimation with SPLIT (RESPLIT)
 
-This code creates approximate *Rashomon sets* of decision trees using the RESPLIT algorithm. The Rashomon set is the set of all almost-optimal models. This code is able to enumerate the Rashomon set for sparse decision trees. In other words, instead of returning a single optimal decision tree, it returns a set of decision trees with an objective (misclassification loss with a penalty on the number of leaves) below a pre-defined threshold. 
+This code creates approximate *Rashomon sets* of decision trees using the RESPLIT algorithm. The Rashomon set is the set of all almost-optimal predictive models. This code is able to enumerate the Rashomon set for sparse decision trees. In other words, instead of returning a single optimal decision tree, it returns a set of decision trees with an objective (misclassification loss with a penalty on the number of leaves) below a pre-defined threshold. 
 
 The code largely builds on the TREEFARMS codebase. To learn more about TreeFARMS, please read the [research paper](https://arxiv.org/abs/2209.08040) (published at NeurIPS'22).
 
