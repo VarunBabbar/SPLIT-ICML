@@ -1,7 +1,9 @@
 # SPLIT-ICML
-Official code for the ICML 2025 Spotlight paper "Near Optimal Decision Trees in a SPLIT Second" 
+Official code for the ICML 2025 Spotlight paper  
+**"Near Optimal Decision Trees in a SPLIT Second"**. [Read the paper on arXiv](https://arxiv.org/pdf/2502.15988)
 
 # Installation Instructions and Quickstart
+
 This repository contains implementations of both packages used and described in the paper. First `cd` into this repository. Then install both SPLIT and RESPLIT via the following. 
 ```bash
 pip install resplit/ split/
