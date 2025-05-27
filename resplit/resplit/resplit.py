@@ -38,7 +38,7 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
             If provided (i.e., not False), loads a precomputed Rashomon prefix set from the given path instead of recomputing it.
             The path should point to a pickled object containing a dict with key 'rset'.
 
-        fill_tree : str, default='optimal'
+        fill_tree : str, default='treefarms'
             Strategy for filling leaves of the prefix trees. Options:
                 - 'greedy'     : fill leaves using a greedy splitting heuristic
                 - 'optimal'    : fill leaves using optimal trees (e.g., via GOSDT)
