@@ -1,6 +1,7 @@
 # SPLIT-ICML
 Official code for the ICML 2025 Spotlight paper: **"Near Optimal Decision Trees in a SPLIT Second"**.
 
+
 [Check out the paper here](https://arxiv.org/pdf/2502.15988)
 
 # Installation Instructions and Quickstart
