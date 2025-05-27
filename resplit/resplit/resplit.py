@@ -19,7 +19,7 @@ def get_num_leaves_greedy(model):
     return get_num_leaves_greedy(model.left_child) + get_num_leaves_greedy(model.right_child)
 
 class RESPLIT(resplit.model.treefarms.TREEFARMS):
-    def __init__(self, config, load_path=False, fill_tree = 'optimal',save_trie_tmp = True):
+    def __init__(self, config, load_path=False, fill_tree = 'optimal',save_trie_tmp = False):
         """
         Initialize the RESPLIT algorithm, a hybrid method that first enumerates near-optimal prefix trees 
         using TREEFARMS and then fills their leaves using one of three strategies: greedy, optimal, or 
@@ -44,7 +44,7 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
                 - 'optimal'    : fill leaves using optimal trees (e.g., via GOSDT)
                 - 'treefarms'  : fill leaves using TREEFARMS subtrees
 
-        save_trie_tmp : bool, default=True
+        save_trie_tmp : bool, default=False
             If True, sets a temporary file path in `config['rashomon_trie']` to store the Rashomon prefix trie
             based on the current config values. Used internally for caching and reproducibility.
 
