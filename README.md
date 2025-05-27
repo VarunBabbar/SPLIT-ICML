@@ -16,7 +16,7 @@ import pandas as pd
 lookahead_depth = 2
 depth_buget = 5
 dataset = pd.read_csv('path/to/compas.csv') 
-X,y = dataset.iloc[:,:-1], dataset.iloc[:,-1]
+X,y = dataset.iloc[:,:-1], dataset.iloc[:,-1] # SPLIT / LicketySPLIT / RESPLIT only support binary classification at this time
 regularization = 0.01
 model = SPLIT(lookahead_depth_budget=lookahead_depth, reg=regularization, full_depth_budget=depth_buget, verbose=False, binarize=False,time_limit=100)
 # set binarize = True if dataset is not binarized.
