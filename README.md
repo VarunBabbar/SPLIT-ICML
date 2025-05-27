@@ -25,7 +25,7 @@ y_pred = model.predict(X)
 tree = model.tree
 print(tree)
 ```
-To run LicketySPLIT
+To run LicketySPLIT:
 ```python
 from split import LicketySPLIT
 model = LicketySPLIT(full_depth_budget=full_depth_budget,reg=regularization)
@@ -33,7 +33,7 @@ model = LicketySPLIT(full_depth_budget=full_depth_budget,reg=regularization)
 ...
 ```
 
-To run RESPLIT
+To run RESPLIT:
 
 ```python
 from resplit import RESPLIT
