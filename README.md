@@ -82,7 +82,6 @@ y_pred = model.predict(X,i) # predictions for the ith tree
   An alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models within `L* + ε` of the best loss `L*`.
 
 - **`rashomon_bound`**  
-  Another alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models within a fixed loss value.  
-  This is a hard threshold rather than a relative `ε`.
+  Another alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models within a fixed loss value. This is a hard threshold rather than a relative `ε`.
 
 For more config options, check out the README in the `resplit` directory.
