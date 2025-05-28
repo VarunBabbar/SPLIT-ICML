@@ -247,15 +247,7 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
             greedy_leaves = get_num_leaves_greedy(greedy_tree)
             greedy_loss = (y != greedy_preds).mean() + \
                 leaf_config['regularization']*greedy_leaves
-            # optimal_tree = GOSDTClassifier(**leaf_config)
-            # optimal_tree.fit(X, y)
-            # optimal_loss = (y != optimal_tree.predict(X)).mean(
-            # ) + leaf_config['regularization']*get_num_leaves_gosdt(optimal_tree)
             rashomon_bound = greedy_loss
-            # rashomon_bound = min(
-            #     0.01, max(0, (greedy_loss - optimal_loss)/optimal_loss))
-            # print("remaining depth: ", self.remaining_depth, min(
-            #     0.1, self.config['regularization']*self.n/len(y)), rashomon_bound)
             treefarms_leaf_config = {'depth_budget': self.remaining_depth, 'regularization': min(0.1, self.config['regularization']*self.n/len(y)),
                   'rashomon_bound': rashomon_bound}
             if rashomon_bound <= self.config['regularization']*self.n/len(y) + 0.0001:
