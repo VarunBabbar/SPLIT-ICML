@@ -19,7 +19,7 @@ def get_num_leaves_greedy(model):
     return get_num_leaves_greedy(model.left_child) + get_num_leaves_greedy(model.right_child)
 
 class RESPLIT(resplit.model.treefarms.TREEFARMS):
-    def __init__(self, config, load_path=False, fill_tree = 'optimal',save_trie_tmp = True):
+    def __init__(self, config, load_path=False, fill_tree = 'treefarms',save_trie_tmp = False):
         """
         Initialize the RESPLIT algorithm, a hybrid method that first enumerates near-optimal prefix trees 
         using TREEFARMS and then fills their leaves using one of three strategies: greedy, optimal, or 
@@ -32,19 +32,19 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
                 - 'regularization': float
                 - 'depth_budget': int
                 - 'rashomon_bound_multiplier': float
-                - (optional) 'fill_tree': {'greedy', 'optimal', 'treefarms'}
+                - 'fill_tree': {'greedy', 'optimal', 'treefarms'}
 
         load_path : str or bool, default=False
             If provided (i.e., not False), loads a precomputed Rashomon prefix set from the given path instead of recomputing it.
             The path should point to a pickled object containing a dict with key 'rset'.
 
-        fill_tree : str, default='optimal'
+        fill_tree : str, default='treefarms'
             Strategy for filling leaves of the prefix trees. Options:
                 - 'greedy'     : fill leaves using a greedy splitting heuristic
                 - 'optimal'    : fill leaves using optimal trees (e.g., via GOSDT)
                 - 'treefarms'  : fill leaves using TREEFARMS subtrees
 
-        save_trie_tmp : bool, default=True
+        save_trie_tmp : bool, default=False
             If True, sets a temporary file path in `config['rashomon_trie']` to store the Rashomon prefix trie
             based on the current config values. Used internally for caching and reproducibility.
 
@@ -250,15 +250,7 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
             greedy_leaves = get_num_leaves_greedy(greedy_tree)
             greedy_loss = (y != greedy_preds).mean() + \
                 leaf_config['regularization']*greedy_leaves
-            # optimal_tree = GOSDTClassifier(**leaf_config)
-            # optimal_tree.fit(X, y)
-            # optimal_loss = (y != optimal_tree.predict(X)).mean(
-            # ) + leaf_config['regularization']*get_num_leaves_gosdt(optimal_tree)
             rashomon_bound = greedy_loss
-            # rashomon_bound = min(
-            #     0.01, max(0, (greedy_loss - optimal_loss)/optimal_loss))
-            # print("remaining depth: ", self.remaining_depth, min(
-            #     0.1, self.config['regularization']*self.n/len(y)), rashomon_bound)
             treefarms_leaf_config = {'depth_budget': self.remaining_depth, 'regularization': min(0.1, self.config['regularization']*self.n/len(y)),
                   'rashomon_bound': rashomon_bound}
             if rashomon_bound <= self.config['regularization']*self.n/len(y) + 0.0001:

@@ -1,5 +1,8 @@
 # SPLIT-ICML
-Official code for the ICML 2025 Spotlight paper: **"Near Optimal Decision Trees in a SPLIT Second"**. [Read the paper on arXiv](https://arxiv.org/pdf/2502.15988)
+Official code for the ICML 2025 Spotlight paper: **"Near Optimal Decision Trees in a SPLIT Second"**.
+
+
+[Check out the paper here](https://arxiv.org/pdf/2502.15988)
 
 # Installation Instructions and Quickstart
 
@@ -16,7 +19,7 @@ import pandas as pd
 lookahead_depth = 2
 depth_buget = 5
 dataset = pd.read_csv('path/to/compas.csv') 
-X,y = dataset.iloc[:,:-1], dataset.iloc[:,-1]
+X,y = dataset.iloc[:,:-1], dataset.iloc[:,-1] # SPLIT / LicketySPLIT / RESPLIT only support binary classification at this time
 regularization = 0.01
 model = SPLIT(lookahead_depth_budget=lookahead_depth, reg=regularization, full_depth_budget=depth_buget, verbose=False, binarize=False,time_limit=100)
 # set binarize = True if dataset is not binarized.
@@ -25,7 +28,7 @@ y_pred = model.predict(X)
 tree = model.tree
 print(tree)
 ```
-To run LicketySPLIT
+To run LicketySPLIT:
 ```python
 from split import LicketySPLIT
 model = LicketySPLIT(full_depth_budget=full_depth_budget,reg=regularization)
@@ -33,7 +36,7 @@ model = LicketySPLIT(full_depth_budget=full_depth_budget,reg=regularization)
 ...
 ```
 
-To run RESPLIT
+To run RESPLIT:
 
 ```python
 from resplit import RESPLIT
@@ -79,7 +82,6 @@ y_pred = model.predict(X,i) # predictions for the ith tree
   An alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models within `L* + ε` of the best loss `L*`.
 
 - **`rashomon_bound`**  
-  Another alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models within a fixed loss value.  
-  This is a hard threshold rather than a relative `ε`.
+  Another alternative to `rashomon_bound_multiplier`. It sets the Rashomon set threshold as the set of all models within a fixed loss value. This is a hard threshold rather than a relative `ε`.
 
 For more config options, check out the README in the `resplit` directory.
