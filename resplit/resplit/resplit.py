@@ -85,6 +85,7 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
         self.num_models = 0
         self.num_models_per_prefix = []
         self.classes = [0,1]
+        self.hashed_subtrees = {}
 
     def fit(self, X, y):
         self.n = X.shape[0]
@@ -125,10 +126,10 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
                 self.num_models_per_prefix.append(num_models)
                 self.models.append(trees)
         if self.fill_tree == 'treefarms':
-            self.hash = self.hash_for_indexing(self.models)
+            self.models = self.hash_for_indexing(self.models)
     
     def save_trie(self, path):
-        # TODO: Implement this
+        # TODO: Implement this in the future
         
         return
 
@@ -147,10 +148,7 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
             return len(self.models)
 
     def __getitem__(self,idx):
-        if self.fill_tree == 'treefarms':
-            return self.get_item_for_hashing(idx)
-        else:
-            return self.models[idx]
+        return self.models[idx]
 
     def get_item_for_hashing(self, idx):
         # find the appropriate prefix
@@ -212,6 +210,10 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
         """
         Train a TREEFARMS model on the given dataset. Output a list of trees as GOSDT Node objects
         """
+        
+        if feature_set in self.hashed_subtrees:
+            return self.hashed_subtrees[feature_set]
+
         config = kwargs
         config['rashomon_trie'] = os.path.join('tmp/rashomon_subtrie_{}.json'.format(feature_set))
         model = TREEFARMS(config)
@@ -223,6 +225,7 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
             tree_dict = vars(model[i])['source']
             tree = self.dict_to_tree(tree_dict, X, y)
             trees.append(tree)
+        self.hashed_subtrees[feature_set] = trees
         return trees
 
     def fill_leaves_with_treefarms(self, tree, X, y,feature_set=''):
