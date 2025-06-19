@@ -1,5 +1,5 @@
 # SPLIT-ICML
-Official code for the ICML 2025 Oral paper: **"Near Optimal Decision Trees in a SPLIT Second"**.
+Official code for the ICML 2025 Oral award paper: **"Near Optimal Decision Trees in a SPLIT Second"**.
 
 
 [Check out the paper here](https://arxiv.org/pdf/2502.15988)
