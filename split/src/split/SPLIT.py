@@ -59,8 +59,6 @@ class SPLIT:
                                                   max_depth=gbdt_max_depth, 
                                                     random_state=42)
             self.enc.set_output(transform="pandas")
-            # fit 
-            X_train = self.enc.fit_transform(X_train, y_train)
 
         self.verbose = verbose
         self.time_limit = time_limit
@@ -70,17 +68,23 @@ class SPLIT:
 
     def fit(self, X_train: pd.DataFrame, y_train):
         '''
-        Requires X_train to be binary
+        Requires X_train to be binary, or for self.binarize to be true
+        (in the latter case X_train is binarized according to the threshold
+        guessing transform, as fit on X_train)
         '''
-        self.clf.fit(X_train, y_train)
+        if self.binarize: # train binarizer
+            X_train_bin = self.enc.fit_transform(X_train, y_train)
+        else: 
+            X_train_bin = X_train
+        self.clf.fit(X_train_bin, y_train)
         self.classes = self.clf.classes_.tolist()
         # fill each leaf with a split classifier
-        self.n = X_train.shape[0]
+        self.n = X_train_bin.shape[0]
         if self.remaining_depth > 0 or self.has_no_depth_limit:
             if self.greedy_postprocess:
-                self.tree = self.fill_leaves_with_greedy(self.clf.trees_[0].tree, X_train, y_train)
+                self.tree = self.fill_leaves_with_greedy(self.clf.trees_[0].tree, X_train_bin, y_train)
             else:
-                self.tree = self.fill_leaves(self.clf.trees_[0].tree, X_train, y_train)
+                self.tree = self.fill_leaves(self.clf.trees_[0].tree, X_train_bin, y_train)
         else:
             self.tree = None
 
@@ -117,6 +121,9 @@ class SPLIT:
         return entropy_val
 
     def find_best_feature_to_split_on(self, X_train,y_train):
+        '''
+        Requires X_train to be binary
+        '''
         num_features = X_train.shape[1]
         max_gain = -10
         gain_of_feature_to_split = 0
@@ -148,6 +155,9 @@ class SPLIT:
         return best_feature
 
     def train_greedy(self, X_train,y_train,depth_budget,reg):
+        '''
+        Requires X_train to be binary
+        '''
         node = Node(feature = None, left_child = None, right_child = None)
 
         # take majority label
@@ -189,6 +199,9 @@ class SPLIT:
         return node, loss
 
     def fill_leaves_with_greedy(self,tree,X_train,y_train):
+        '''
+        Requires X_train to be binary
+        '''
         if isinstance(tree, Leaf):
             node, loss = self.train_greedy(X_train, y_train, self.remaining_depth, self.leaf_config['regularization'] * self.n/len(y_train))
             return node
@@ -233,10 +246,17 @@ class SPLIT:
             return self._predict_sample(x_i, node.right_child)
 
     def predict(self, X_test: pd.DataFrame):
-        if self.tree is None:
-            return self.clf.predict(X_test)
+        '''
+        Requires X_test to be binary, or for self.binarize to be true
+        '''
+        if self.binarize: # apply binarizer
+            X_test_bin = self.enc.transform(X_test)
         else:
-            X_values = X_test.values
+            X_test_bin = X_test
+        if self.tree is None:
+            return self.clf.predict(X_test_bin)
+        else:
+            X_values = X_test_bin.values
             return np.array([self._predict_sample(X_values[i, :], self.tree)
                              for i in range(X_values.shape[0])])
 
@@ -254,86 +274,6 @@ class SPLIT:
                    "True": self._tree_to_dict(node.left_child),
                    "False": self._tree_to_dict(node.right_child)
             }
-
-# class LookaheadWrapper(SPLIT):
-#     def __init__(self, gbdt_n_est=40, gbdt_max_depth=1, reg = 0.001, 
-#                  lookahead_depth_budget=3, time_limit=60, 
-#                  full_depth_budget = 6, similar_support=False, verbose=True, 
-#                  allow_small_reg=True):
-#         self.enc = ThresholdGuessBinarizer(n_estimators=gbdt_n_est, 
-#                                            max_depth=gbdt_max_depth, 
-#                                            random_state=2021)
-#         self.enc.set_output(transform="pandas")
-#         super().__init__(reg=reg, similar_support=similar_support, 
-#               time_limit=time_limit,
-#               lookahead_depth_budget=lookahead_depth_budget, 
-#               full_depth_budget=full_depth_budget,
-#               verbose=verbose,
-#               allow_small_reg=allow_small_reg)
-        
-
-#     def fit(self, X_train: pd.DataFrame, y_train):
-#         # Guess Thresholds
-#         X_train_guessed = self.enc.fit_transform(X_train, y_train)
-#         # No LB guess for now - want it to be the same model as the self.enc transform fitter
-
-#         # Train the split classifier
-#         super().fit(X_train_guessed, y_train)
-    
-
-#     def predict(self, X_test: pd.DataFrame):
-#         X_test_guessed = self.enc.transform(X_test)
-#         return super().predict(X_test_guessed)
-       
-
-# def test_lookahead_exact(): 
-#     data = pd.DataFrame({'a': [1, 1, 0, 0, 1], 
-#                       'b': [1, 0, 1, 0, 1], 
-#                       'y': [1, 0, 0, 1, 1]})
-#     y = data['y']
-#     X = data.drop(columns='y')
-#     model = SPLIT(lookahead_depth_budget=2, time_limit=60, verbose=True, reg=0.001)
-#     model.fit(X, y)
-#     preds = model.predict(X)
-#     assert np.all(preds == y)
-
-# def test_lookahead_exact_depth_3(): 
-#     data = pd.DataFrame({
-#                       'a': [1, 1, 0, 0, 1, 0, 1, 0, 1], 
-#                       'b': [1, 0, 1, 0, 1, 0, 1, 1, 0], 
-#                       'c': [1, 0, 1, 0, 1, 1, 0, 0, 1], 
-#                       'y': [1, 1, 0, 0, 1, 1, 0, 1, 0]})
-#     y = data['y']
-#     X = data.drop(columns='y')
-#     model = SPLIT(lookahead_depth_budget=3, full_depth_budget=6,
-#                                    time_limit=60, verbose=True, reg=0.001)
-#     model.fit(X, y) # core question - is the prefix, before being filled in, actually optimal given cart being filled in? or is the cart heuristic just being evaluated as a leaf? 
-#     preds = model.predict(X)
-#     assert np.all(preds == y)
-
-# def test_lookahead(): 
-#     data = pd.DataFrame({'a': [1, 1, 4, 0, 1], 
-#                       'b': [1, 4, 3, 0, 1], 
-#                       'y': [1, 0, 0, 1, 1]})
-#     y = data['y']
-#     X = data.drop(columns='y')
-#     model = LookaheadWrapper(gbdt_n_est=2, gbdt_max_depth=1, reg=0.001, 
-#                              lookahead_depth_budget=3, time_limit=60, verbose=True)
-#     model.fit(X, y)
-#     preds = model.predict(X)
-#     assert np.all(preds == y)
-
-# def test_lookahead_and_wrapper_db_1(): 
-#     data = pd.DataFrame({'a': [1, 1, 4, 0, 1], 
-#                       'b': [1, 4, 3, 0, 1], 
-#                       'y': [1, 0, 0, 1, 1]})
-#     y = data['y']
-#     X = data.drop(columns='y')
-#     model = LookaheadWrapper(gbdt_n_est=2, gbdt_max_depth=1, reg=0.001, 
-#                              lookahead_depth_budget=1, time_limit=60, verbose=True)
-#     model.fit(X, y)
-#     preds = model.predict(X)
-#     assert np.all(preds == y)
 
 
 if __name__ == "__main__":
