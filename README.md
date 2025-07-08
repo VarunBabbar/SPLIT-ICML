@@ -57,6 +57,7 @@ model = RESPLIT(config, fill_tree = "treefarms")
 # "optimal" will complete prefixes using GOSDT.
 # "greedy" will do so using greedy completions. 
 model.fit(X,y)
+i = 0
 tree = model[i] # get the ith tree
 print(tree)
 y_pred = model.predict(X,i) # predictions for the ith tree
