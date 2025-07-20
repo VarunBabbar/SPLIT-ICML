@@ -4,7 +4,7 @@ Official code for the ICML 2025 Oral paper: **"Near Optimal Decision Trees in a 
 
 [Check out the paper here](https://arxiv.org/pdf/2502.15988)
 
-Note that this code is in beta. Based on positive reception at ICML we plan to create more accessible versions of the code soon - please stay tuned! In the meantime, this code is here for data science practitioners, researchers, and students interested in trying our method and/or replicating our paper results. If you encounter problems, please feel free to leave a github issue.
+Note that this code is in beta. Based on positive reception at ICML, we plan to create more accessible versions of the code soon - please stay tuned! In the meantime, this code is here for data science practitioners, researchers, and students interested in trying our method and/or replicating our paper results. If you encounter problems, please feel free to leave a github issue.
 
 This is an open source project; contributions are welcome!
 
