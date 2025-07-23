@@ -1,12 +1,15 @@
 # SPLIT-ICML
 Official code for the ICML 2025 Oral paper: **"Near Optimal Decision Trees in a SPLIT Second"**.
 
-
 [Check out the paper here](https://arxiv.org/pdf/2502.15988)
 
 Note that this code is in beta. Based on positive reception at ICML, we plan to create more accessible versions of the code soon - please stay tuned! In the meantime, this code is here for data science practitioners, researchers, and students interested in trying our method and/or replicating our paper results. If you encounter problems, please feel free to leave a github issue.
 
-This is an open source project; contributions are welcome!
+This is an open source project; contributions are welcome! 
+
+Acknowledgements: 
+1. SPLIT, LicketySPLIT code is a modified version of the GOSDT codebase: https://github.com/ubc-systopia/gosdt-guesses/tree/main
+2. RESPLIT is a modified version of the TreeFARMS codebase: https://github.com/ubc-systopia/treeFarms
 
 # Installation Instructions and Quickstart
 
