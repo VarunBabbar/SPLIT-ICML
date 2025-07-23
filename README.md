@@ -7,7 +7,7 @@ Note that this code is in beta. Based on positive reception at ICML, we plan to 
 
 This is an open source project; contributions are welcome! 
 
-Acknowledgements: 
+**Acknowledgements**: 
 1. SPLIT, LicketySPLIT code is a modified version of the GOSDT codebase: https://github.com/ubc-systopia/gosdt-guesses/tree/main
 2. RESPLIT is a modified version of the TreeFARMS codebase: https://github.com/ubc-systopia/treeFarms
 
