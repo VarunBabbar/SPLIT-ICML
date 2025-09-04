@@ -96,13 +96,14 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
         self.remaining_depth = self.config['depth_budget'] - \
             self.config['cart_lookahead_depth']+1
         print("Found set of near optimal prefixes. Filling in their leaves now.")
+        X_values = X.values
         for i in tqdm(range(self.rashomon_set_prefix.get_tree_count())):
             tree_dict = vars(self.rashomon_set_prefix[i])['source']
             tree = self.dict_to_tree(tree_dict, X, y)
             if self.fill_tree == 'greedy':
                 tree = self.fill_leaves_with_greedy(tree, X, y)
                 tree_pred = np.array([self._predict_sample(
-                    X.values[i, :], tree) for i in range(X.shape[0])])
+                    X_values[i, :], tree) for i in range(X.shape[0])])
                 tree_loss = (y != tree_pred).mean()
                 tree_leaves = get_num_leaves_greedy(tree)
                 obj = tree_loss + self.config['regularization']*tree_leaves
@@ -110,7 +111,7 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
             elif self.fill_tree == 'optimal':
                 tree = self.fill_leaves_with_optimal(tree, X, y)
                 tree_pred = np.array([self._predict_sample(
-                    X.values[i, :], tree) for i in range(X.shape[0])])
+                    X_values[i, :], tree) for i in range(X.shape[0])])
                 tree_loss = (y != tree_pred).mean()
                 tree_leaves = get_num_leaves_greedy(tree)
                 obj = tree_loss + self.config['regularization']*tree_leaves
@@ -431,33 +432,30 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
         """
         Calculate the entropy of a given list of binary labels.
         """
-        p_positive = ps[0]
-        if p_positive == 0 or p_positive == 1:
-            return 0  # Entropy is 0 if all labels are the same
-        entropy_val = - (p_positive * np.log2(p_positive) +
-                         (1 - p_positive) * np.log2(1 - p_positive))
+        # get frequency counts
+        counts = ps.value_counts(normalize=True).values
+        probabilities = counts/sum(counts)
+        entropy_val = 0
+        for p in probabilities:
+            entropy_val -= (p * np.log2(p))
         return entropy_val
 
     def find_best_feature_to_split_on(self, X, y):
         num_features = X.shape[1]
         max_gain = -10
         gain_of_feature_to_split = 0
-        p_original = np.mean(y)
-        entropy_original = self.entropy([p_original, 1-p_original])
+        entropy_original = self.entropy(y)
         best_feature = -1
         for feature in range(num_features):
             # Left child labels
-            p_left = np.mean(y[X.iloc[:, feature] == 1])
+            y_left = y[X.iloc[:, feature] == 1]
 
             # Right child labels
-            p_right = np.mean(y[X.iloc[:, feature] == 0])
+            y_right = y[X.iloc[:, feature] == 0]
 
-            p_left = 0 if np.isnan(p_left) else p_left
-            p_right = 0 if np.isnan(p_right) else p_right
+            entropy_left = self.entropy(y_left)
 
-            entropy_left = self.entropy(np.array([p_left, 1 - p_left]))
-
-            entropy_right = self.entropy(np.array([p_right, 1 - p_right]))
+            entropy_right = self.entropy(y_right)
 
             proportion_of_examples_in_left_leaf = (
                 np.sum(X.iloc[:, feature] == 1) / len(X))
