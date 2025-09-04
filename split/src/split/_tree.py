@@ -14,7 +14,9 @@ class Leaf:
 
     def __str__(self) -> str:
         return "{ prediction: " + str(self.prediction) + ", loss: " + str(self.loss) + " }"
-
+    
+    def json(self):
+        return '{ "prediction": ' + str(self.prediction) +', "loss": ' + str(self.loss) + ' }'
 
 class Node:
 
@@ -26,6 +28,8 @@ class Node:
     def __str__(self) -> str:
         return "{ feature: " + str(self.feature) + " [ left child: " + str(self.left_child) + ", right child: " + str(self.right_child) + "] }"
 
+    def json(self):
+        return '{ "feature": ' + str(self.feature) + ', "true": ' + self.left_child.json() + ', "false": ' + self.right_child.json() + '}'
 
 class Tree:
     # Left is TRUE, Right is FALSE
