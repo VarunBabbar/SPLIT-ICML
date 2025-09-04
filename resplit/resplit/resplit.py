@@ -147,6 +147,9 @@ class RESPLIT(resplit.model.treefarms.TREEFARMS):
         else:
             return len(self.models)
 
+    def get_tree_count(self):
+        return self.__len__()
+
     def __getitem__(self,idx):
         return self.models[idx]
 
