@@ -17,6 +17,7 @@ This repository contains implementations of both packages used and described in 
 ```bash
 pip install resplit/ split/
 ```
+We recommend installing and running the package on Linux or WSL environments. Mac support is still limited, as the code has not been extensively tested on macOS.
 
 To run SPLIT:
 
