@@ -15,12 +15,12 @@ This is an open source project; contributions are welcome!
 If you use this code in your work, please cite it as below:
 ```bibtex
 @inproceedings{
-babbar2025nearoptimal,
-title={Near-Optimal Decision Trees in a {SPLIT} Second},
-author={Varun Babbar and Hayden McTavish and Cynthia Rudin and Margo Seltzer},
-booktitle={Forty-second International Conference on Machine Learning},
-year={2025},
-url={https://openreview.net/forum?id=ACyyBrUioy}
+   babbar2025nearoptimal,
+   title={Near-Optimal Decision Trees in a {SPLIT} Second},
+   author={Varun Babbar and Hayden McTavish and Cynthia Rudin and Margo Seltzer},
+   booktitle={Forty-second International Conference on Machine Learning},
+   year={2025},
+   url={https://openreview.net/forum?id=ACyyBrUioy}
 }
 ```
 
