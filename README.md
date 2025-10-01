@@ -11,7 +11,8 @@ This is an open source project; contributions are welcome!
 1. SPLIT and LicketySPLIT are built from a modified version of the GOSDT codebase: https://github.com/ubc-systopia/gosdt-guesses/tree/main
 2. RESPLIT are built from a modified version of the TreeFARMS codebase: https://github.com/ubc-systopia/treeFarms
    
-**Citation**
+**Citation**:
+
 If you use this code in your work, please cite it as below:
 ```bibtex
 @inproceedings{
