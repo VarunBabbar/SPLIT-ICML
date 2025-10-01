@@ -10,6 +10,19 @@ This is an open source project; contributions are welcome!
 **Acknowledgements**: 
 1. SPLIT and LicketySPLIT are built from a modified version of the GOSDT codebase: https://github.com/ubc-systopia/gosdt-guesses/tree/main
 2. RESPLIT are built from a modified version of the TreeFARMS codebase: https://github.com/ubc-systopia/treeFarms
+   
+**Citation**
+If you use this code in your work, please cite it as below:
+```bibtex
+@inproceedings{
+babbar2025nearoptimal,
+title={Near-Optimal Decision Trees in a {SPLIT} Second},
+author={Varun Babbar and Hayden McTavish and Cynthia Rudin and Margo Seltzer},
+booktitle={Forty-second International Conference on Machine Learning},
+year={2025},
+url={https://openreview.net/forum?id=ACyyBrUioy}
+}
+```
 
 # Installation Instructions and Quickstart
 
