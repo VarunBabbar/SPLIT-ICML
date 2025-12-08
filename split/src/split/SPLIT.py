@@ -272,6 +272,7 @@ class SPLIT:
         else:
             return {"feature": node.feature,
                    "true": self._tree_to_dict(node.left_child),
-                   "talse": self._tree_to_dict(node.right_child)
+                   "false": self._tree_to_dict(node.right_child)
 
             }
+
