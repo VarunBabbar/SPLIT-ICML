@@ -128,8 +128,8 @@ class GreedyWrapper:
             return {'prediction': self.classes_[node.prediction]}
         else:
             return {"feature": node.feature,
-                   "True": self._tree_to_dict(node.left_child),
-                   "False": self._tree_to_dict(node.right_child)
+                   "true": self._tree_to_dict(node.left_child),
+                   "false": self._tree_to_dict(node.right_child)
             }
     def num_leaves(self,tree_as_dict=None):
         if tree_as_dict is None:
@@ -147,3 +147,4 @@ y_pred = greedy_tree.predict(X_train)
 print((y_pred != y_train).mean())
 print(greedy_tree.tree_to_dict())
 print(greedy_tree.num_leaves())
+
