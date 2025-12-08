@@ -19,6 +19,7 @@ def _tree_to_dict(node, classes):
         return {'prediction': classes[node.prediction]}
     else:
         return {"feature": node.feature,
-                "True": _tree_to_dict(node.left_child, classes),
-                "False": _tree_to_dict(node.right_child, classes)
+                "true": _tree_to_dict(node.left_child, classes),
+                "false": _tree_to_dict(node.right_child, classes)
+
         }
