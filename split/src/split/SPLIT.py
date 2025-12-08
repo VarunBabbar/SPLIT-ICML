@@ -271,6 +271,7 @@ class SPLIT:
             return {'prediction': self.clf.classes_[node.prediction]}
         else:
             return {"feature": node.feature,
-                   "True": self._tree_to_dict(node.left_child),
-                   "False": self._tree_to_dict(node.right_child)
+                   "true": self._tree_to_dict(node.left_child),
+                   "talse": self._tree_to_dict(node.right_child)
+
             }
