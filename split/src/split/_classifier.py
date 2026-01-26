@@ -390,7 +390,7 @@ class GOSDTClassifier(ClassifierMixin, BaseEstimator):
                 f"Requesting a prediction from model {model_number} but only {len(self.trees_)} models were extracted.")
 
         # Validate X
-        X = check_array(X, ensure_2d=True, force_all_finite=True)
+        X = check_array(X, ensure_2d=True, ensure_all_finite=True)
 
         return self.trees_[model_number].predict(X)
 
