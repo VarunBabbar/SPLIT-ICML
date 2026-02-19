@@ -203,7 +203,7 @@ class SPLIT:
         Requires X_train to be binary
         '''
         if isinstance(tree, Leaf):
-            node, loss = self.train_greedy(X_train, y_train, self.remaining_depth, self.leaf_config['regularization'] * self.n/len(y_train))
+            node, loss = self.train_greedy(X_train, y_train, self.remaining_depth, self.leaf_config['regularization'])
             return node
         else:
             X_left = X_train[X_train.iloc[:, tree.feature] == True]
@@ -273,4 +273,5 @@ class SPLIT:
             return {"feature": node.feature,
                    "True": self._tree_to_dict(node.left_child),
                    "False": self._tree_to_dict(node.right_child)
+
             }
