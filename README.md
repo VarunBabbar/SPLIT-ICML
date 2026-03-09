@@ -34,10 +34,8 @@ SPLIT and RESPLIT have C++ extensions that depend on TBB, CMake, Ninja, pkg-conf
 - **Using Conda (recommended on clusters):**  
   Install build tools and libraries via Conda, then the compilers:
   ```bash
-  conda install tbb cmake ninja pkg-config gmp
-  conda install compilers
+  conda install -c conda-forge gcc_linux-64 gxx_linux-64 cmake ninja tbb tbb-devel pkg-config gmp
   ```
-  (Conda’s `compilers` package provides the C/C++ toolchain; using Conda for dependencies avoids conflicts with cluster system libraries.)
 
 - **Using the system (e.g. Ubuntu/Debian with sudo-apt or Colab):**  
   Install the development packages before `pip install`:
