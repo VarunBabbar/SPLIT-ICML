@@ -8,7 +8,7 @@ Given the Rashomon set enumerated by this code, an interactive tool [TimberTrek]
 
 To make RESPLIT run faster, please use the options to limit the depth of the tree, and increase the regularization parameter above 0.01. If you run the algorithm without a depth constraint or set the regularization too small, it will run more slowly.
 
-# Table of Content
+# Table of Contents
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Repository Structure](#structure)
