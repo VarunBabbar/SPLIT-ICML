@@ -27,6 +27,26 @@ If you use this code in your work, please cite it as below:
 
 # Installation Instructions and Quickstart
 
+## Prerequisites (before installing SPLIT / RESPLIT)
+
+SPLIT and RESPLIT have C++ extensions that depend on TBB, CMake, Ninja, pkg-config, GMP, and a C++ compiler.
+
+- **Using Conda (recommended on clusters with linux 64):**  
+  Install build tools and libraries via Conda, then the compilers:
+  ```bash
+  conda install -c conda-forge gcc_linux-64 gxx_linux-64 cmake ninja tbb tbb-devel pkg-config gmp
+  ```
+
+- **Using the system (e.g. Ubuntu/Debian with sudo-apt or Colab):**  
+  Install the development packages before `pip install`:
+  ```bash
+  sudo apt-get install -y libtbb-dev cmake ninja-build pkg-config libgmp-dev
+  ```
+
+After these prerequisites are satisfied, proceed with the install steps below.
+
+---
+
 This repository contains implementations of both packages used and described in the paper. First `cd` into this repository. Then install both SPLIT and RESPLIT via the following. 
 ```bash
 pip install resplit/ split/
