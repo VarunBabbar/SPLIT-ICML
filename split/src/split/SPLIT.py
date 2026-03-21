@@ -148,7 +148,7 @@ class SPLIT:
             proportion_of_examples_in_right_leaf = (np.sum(X_train.iloc[:, feature] == 0) / len(X_train))
             gain = entropy_original - ( proportion_of_examples_in_left_leaf* entropy_left +
                                         proportion_of_examples_in_right_leaf* entropy_right)
-            if gain >= max_gain:
+            if gain > max_gain:
                 max_gain = gain
                 best_feature = feature
 
