@@ -72,6 +72,8 @@ class SPLIT:
         (in the latter case X_train is binarized according to the threshold
         guessing transform, as fit on X_train)
         '''
+        if len(np.unique(y_train)) > 2:
+            raise ValueError("SPLIT only supports binary classification for now.")
         if self.binarize: # train binarizer
             X_train_bin = self.enc.fit_transform(X_train, y_train)
         else: 
