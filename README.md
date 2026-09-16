@@ -3,7 +3,9 @@ Official code for the ICML 2025 Oral paper: **"Near Optimal Decision Trees in a 
 
 [Check out the paper here](https://arxiv.org/pdf/2502.15988)
 
-Note that this code is in beta. Based on positive reception at ICML, we plan to create more accessible versions of the code soon - please stay tuned! In the meantime, this code is here for data science practitioners, researchers, and students interested in trying our method and/or replicating our paper results. If you encounter problems, please feel free to leave a github issue.
+** IMPORTANT: If you are a researcher or practitioner looking for a modern decision tree method or baseline, we would recommend you use this package: https://github.com/zakk-h/LicketySPLIT (with corresponding pip package `pip install licketysplit`), which implements the LicketySPLIT method from this paper with some wonderful subsequent modifications from our colleague Zakk Heile. That version of the package runs substantially faster and includes many frequently requested features, such as multiclass predictions and regression. This SPLIT repository is a historical, beta-version codebase, kept to preserve the version presented at ICML 2025, that is not actively maintained. We have expanded the method that is most promising (LicketySPLIT) to that new repository.**
+
+Note that this code is in beta. This code is here for data science practitioners, researchers, and students interested in trying our method and/or replicating our paper results. If you encounter problems, please feel free to leave a github issue.
 
 This is an open source project; contributions are welcome! 
 
