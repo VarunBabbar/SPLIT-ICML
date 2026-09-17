@@ -1,9 +1,17 @@
+# New Updated Repositories! (September 2026)
+
+We have designed, implemented and published several improved versions of the algorithms first presented in this repository's companion ICML paper. If you are a researcher or practitioner looking for modern versions of the methods from this paper, we recommend the repositories listed below. Special thanks to our colleagues Zakk Heile and Yixiao Wang for helming these refinements.
+
+- If you are interested in our **fastest single-tree algorithm from the SPLIT paper, LicketySPLIT, please see the repository at [this https link](https://github.com/zakk-h/LicketySPLIT) (with corresponding pip package `pip install licketysplit`)**. This corresponds to the algorithm from this paper, but with a number of wonderful additions: this includes support for multiclass and regression tasks, as well as a number of significant efficiency improvements outlined in a subsequent [paper](https://arxiv.org/abs/2606.00202)). A separate [repository](https://github.com/Yixiao-Wang-Stats/CLARITree) implements a version supporting piecewise linear regression trees with a similar pilot search approach.
+
+- If you are interested in our **Rashomon set approximation algorithm, RESPLIT, please see the repository at [this https link](https://github.com/zakk-h/ArborEnum).** We expanded the idea from RESPLIT to handle a much more general class of approximations, with a number of theoretical guarantees (see [this paper](https://arxiv.org/abs/2606.00202) and [this codebase](https://github.com/zakk-h/PRAXIS)). We subsequently provided the first method to support decision tree Rashomon set enumeration directly over continuous features in [this follow-on paper](https://arxiv.org/abs/2606.00202).
+
 # SPLIT-ICML
 Official code for the ICML 2025 Oral paper: **"Near Optimal Decision Trees in a SPLIT Second"**.
 
 [Check out the paper here](https://arxiv.org/pdf/2502.15988)
 
-**IMPORTANT: If you are a researcher or practitioner looking for a modern decision tree method or baseline, we would recommend you use this package: https://github.com/zakk-h/LicketySPLIT (with corresponding pip package `pip install licketysplit`)**. This package implements the LicketySPLIT method from this paper with some wonderful subsequent modifications from our colleague Zakk Heile. That version of the package runs _substantially faster_ and includes many frequently requested features, such as multiclass predictions and regression. This SPLIT repository is a historical, beta-version codebase, kept to preserve the version presented at ICML 2025, that is not actively maintained. We have expanded the method that is most promising (LicketySPLIT) to that new repository.
+**IMPORTANT: If you are a researcher or practitioner looking for a modern decision tree method or baseline, we would recommend you use the packages discussed in the preceding section, which generalize and expand on the methods from this paper**. This SPLIT repository is a historical, beta-version codebase, kept to preserve the version presented at ICML 2025, that is not actively maintained. We have expanded the methods we found most promising (LicketySPLIT, RESPLIT) to these new repositories.
 
 Note that this code is in beta. This code is here for data science practitioners, researchers, and students interested in trying our method and/or replicating our paper results. If you encounter problems, please feel free to leave a github issue.
 
