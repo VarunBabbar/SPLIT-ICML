@@ -79,6 +79,7 @@ class LicketySPLIT:
             n = X_train_bin.shape[0]
             child_config = self.config.copy()
             child_config['depth_budget'] = self.config['depth_budget'] - self.lookahead_range + 1 # we know this doesn't decrease config to 0 because of the condition we're in
+            child_config['cart_lookahead_depth'] = min(self.lookahead_range, child_config['depth_budget']) # prevent lookahead from exceeding remaining depth
             tree = self._fill_leaves(tree, X_train_bin, y_train, n, child_config)
         
         self.tree = tree
@@ -91,6 +92,7 @@ class LicketySPLIT:
             n = X_train.shape[0]
             child_config = config.copy()
             child_config['depth_budget'] = config['depth_budget'] - self.lookahead_range + 1 # we know this doesn't decrease config to 0 because of the condition we're in
+            child_config['cart_lookahead_depth'] = min(self.lookahead_range, child_config['depth_budget']) # prevent lookahead from exceeding remaining depth
             tree = self._fill_leaves(tree, X_train, y_train, n, child_config)
         
 
