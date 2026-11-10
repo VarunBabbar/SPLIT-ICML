@@ -75,10 +75,10 @@ class LicketySPLIT:
         self.classes = clf.classes_.tolist()
         tree = clf.trees_[0].tree
 
-        if not self.config['depth_budget'] < self.lookahead_range or self.has_no_depth_limit: # otherwise, one convergence condition
+        if self.config['depth_budget'] > self.lookahead_range or self.has_no_depth_limit: # otherwise, one convergence condition
             n = X_train_bin.shape[0]
             child_config = self.config.copy()
-            child_config['depth_budget'] = self.config['depth_budget'] - LOOKAHEAD_RANGE + 1 # we know this doesn't decrease config to 0 because of the condition we're in
+            child_config['depth_budget'] = self.config['depth_budget'] - self.lookahead_range + 1 # we know this doesn't decrease config to 0 because of the condition we're in
             tree = self._fill_leaves(tree, X_train_bin, y_train, n, child_config)
         
         self.tree = tree
@@ -87,10 +87,10 @@ class LicketySPLIT:
         clf = GOSDTClassifier(**config)
         clf.fit(X_train, y_train)
         tree = self.extract_tree(clf)
-        if not config['depth_budget'] < self.lookahead_range or self.has_no_depth_limit: # otherwise, one convergence condition 
+        if config['depth_budget'] > self.lookahead_range or self.has_no_depth_limit: # otherwise, one convergence condition 
             n = X_train.shape[0]
             child_config = config.copy()
-            child_config['depth_budget'] = config['depth_budget'] - LOOKAHEAD_RANGE + 1 # we know this doesn't decrease config to 0 because of the condition we're in
+            child_config['depth_budget'] = config['depth_budget'] - self.lookahead_range + 1 # we know this doesn't decrease config to 0 because of the condition we're in
             tree = self._fill_leaves(tree, X_train, y_train, n, child_config)
         
 
